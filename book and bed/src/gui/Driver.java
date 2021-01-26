@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 public class Driver {
 
 	public static void main(String[] args) {
+		Dashboard dashboard = new Dashboard();
 		LoginPanel loginPanel = new LoginPanel();
 		JFrame loginFrame = new JFrame();
 		loginFrame.setContentPane(loginPanel);
@@ -20,6 +21,7 @@ public class Driver {
 			public void passLogin(boolean flag) {
 				// TODO Auto-generated method stub
 				loginFrame.setVisible(false);
+				dashboard.setVisible(true);
 			}
 		});
 	}
