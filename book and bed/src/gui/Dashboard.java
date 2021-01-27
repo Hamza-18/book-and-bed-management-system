@@ -14,6 +14,7 @@ public class Dashboard extends JFrame {
 	private SidePanel sidePanel;
 	private TitlePanel titlePanel;
 	private HomePanel homePanel;
+	private StudentPanel studentPanel;
 
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,6 +32,9 @@ public class Dashboard extends JFrame {
 		contentPane.add(titlePanel, BorderLayout.NORTH);
 
 		homePanel = new HomePanel();
-		contentPane.add(homePanel, BorderLayout.CENTER);
+//		contentPane.add(homePanel, BorderLayout.CENTER);
+
+		studentPanel = new StudentPanel();
+		contentPane.add(studentPanel, BorderLayout.CENTER);
 	}
 }
