@@ -16,7 +16,7 @@ import javax.swing.border.LineBorder;
 public class SidePanel extends JPanel {
 
 	private JPanel homePanel;
-	private JPanel studentsPanel;
+	private JPanel studentPanel;
 	private JPanel employeePanel;
 	private JPanel kitchenPanel;
 
@@ -31,6 +31,8 @@ public class SidePanel extends JPanel {
 	private static final int SELECTED_RED = 69;
 	private static final int SELECTED_GREEN = 76;
 	private static final int SELECTED_BLUE = 176;
+
+	private SidePanelInterface sidePanelInterface;
 
 	public SidePanel() {
 
@@ -56,6 +58,7 @@ public class SidePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setPanelColor(homePanel);
+				sidePanelInterface.setPanel("homePanel");
 			}
 
 			@Override
@@ -76,7 +79,7 @@ public class SidePanel extends JPanel {
 
 			}
 		});
-		studentsPanel.addMouseListener(new MouseListener() {
+		studentPanel.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -87,7 +90,8 @@ public class SidePanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				setPanelColor(studentsPanel);
+				setPanelColor(studentPanel);
+				sidePanelInterface.setPanel("studentPanel");
 			}
 
 			@Override
@@ -120,6 +124,7 @@ public class SidePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setPanelColor(employeePanel);
+				sidePanelInterface.setPanel("employeePanel");
 			}
 
 			@Override
@@ -152,7 +157,7 @@ public class SidePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setPanelColor(kitchenPanel);
-				;
+
 			}
 
 			@Override
@@ -196,19 +201,19 @@ public class SidePanel extends JPanel {
 		homeLabel = new JLabel("Home");
 		homePanel.add(homeLabel);
 
-		studentsPanel = new JPanel();
-		studentsPanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
-		studentsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		studentPanel = new JPanel();
+		studentPanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
+		studentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		GridBagConstraints gbc_studentsPanel = new GridBagConstraints();
 		gbc_studentsPanel.anchor = GridBagConstraints.NORTH;
 		gbc_studentsPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_studentsPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_studentsPanel.gridx = 0;
 		gbc_studentsPanel.gridy = 2;
-		add(studentsPanel, gbc_studentsPanel);
+		add(studentPanel, gbc_studentsPanel);
 
 		studentsLabel = new JLabel("Students");
-		studentsPanel.add(studentsLabel);
+		studentPanel.add(studentsLabel);
 
 		employeePanel = new JPanel();
 		employeePanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
@@ -239,7 +244,7 @@ public class SidePanel extends JPanel {
 	}
 
 	public void setPanelColor(JPanel panel) {
-		JPanel[] panels = { homePanel, studentsPanel, employeePanel, kitchenPanel };
+		JPanel[] panels = { homePanel, studentPanel, employeePanel, kitchenPanel };
 		panel.setBackground(new Color(SELECTED_RED, SELECTED_GREEN, SELECTED_BLUE));
 		panel.setBorder(new LineBorder(Color.BLACK));
 		for (JPanel jPanel : panels) {
@@ -248,6 +253,10 @@ public class SidePanel extends JPanel {
 				jPanel.setBorder(null);
 			}
 		}
+	}
+
+	public void addPanel(SidePanelInterface sidePanelInterface) {
+		this.sidePanelInterface = sidePanelInterface;
 	}
 
 }

@@ -13,7 +13,7 @@ public class TitlePanel extends JPanel {
 	private Image icon;
 
 	public TitlePanel() {
-		setBackground(Color.BLACK);
+		setBackground(new Color(0, 125, 125));
 		setMinimumSize(new Dimension(600, 90));
 		setLayout(new FlowLayout(FlowLayout.CENTER));
 

@@ -99,6 +99,7 @@ public class LoginPanel extends JPanel {
 					loginInterface.passLogin(true);
 				} else {
 					warning.setText("* Wrong user name or password");
+					loginInterface.passLogin(true);
 				}
 			}
 		});

@@ -20,11 +20,18 @@ public class StudentPanel extends JPanel {
 	private JPanel deleteStudentPanel;
 	private Image icon;
 	private Image deleteStudentIcon;
+	private Image updateStudentIcon;
+	private Image viewStudentIcon;
+	private SidePanelInterface sidePanelInterface;
 
 	public StudentPanel() {
 		setLayout(new BorderLayout());
 		setBackground(new Color(255, 255, 255));
+		setComponents();
 
+	}
+
+	public void setComponents() {
 		titlePanel = new JPanel();
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		add(titlePanel, BorderLayout.NORTH);
@@ -38,7 +45,7 @@ public class StudentPanel extends JPanel {
 		add(componentsPanel, BorderLayout.CENTER);
 
 		viewStudentPanel = new JPanel();
-		viewStudentPanel.setBounds(12, 55, 296, 53);
+		viewStudentPanel.setBounds(12, 55, 301, 65);
 		componentsPanel.add(viewStudentPanel);
 
 		JLabel lblViewStudents = new JLabel("View Students");
@@ -46,26 +53,26 @@ public class StudentPanel extends JPanel {
 		viewStudentPanel.add(lblViewStudents);
 
 		addStudentPanel = new JPanel();
-		addStudentPanel.setBounds(334, 55, 296, 53);
+		addStudentPanel.setBounds(334, 55, 296, 65);
 		componentsPanel.add(addStudentPanel);
 
-		JLabel lblAddStudents = new JLabel("Add Students");
+		JLabel lblAddStudents = new JLabel("Add Student");
 		lblAddStudents.setFont(new Font("Dialog", Font.BOLD, 25));
 		addStudentPanel.add(lblAddStudents);
 
 		updateStudentPanel = new JPanel();
-		updateStudentPanel.setBounds(12, 160, 296, 53);
+		updateStudentPanel.setBounds(12, 160, 301, 65);
 		componentsPanel.add(updateStudentPanel);
 
-		JLabel lblUpdateStudents = new JLabel("Update Students");
+		JLabel lblUpdateStudents = new JLabel("Update Student");
 		lblUpdateStudents.setFont(new Font("Dialog", Font.BOLD, 25));
 		updateStudentPanel.add(lblUpdateStudents);
 
 		deleteStudentPanel = new JPanel();
-		deleteStudentPanel.setBounds(334, 160, 296, 53);
+		deleteStudentPanel.setBounds(334, 160, 296, 65);
 		componentsPanel.add(deleteStudentPanel);
 
-		JLabel lblDeleteStudents = new JLabel("Delete Students");
+		JLabel lblDeleteStudents = new JLabel("Delete Student");
 		lblDeleteStudents.setFont(new Font("Dialog", Font.BOLD, 25));
 		deleteStudentPanel.add(lblDeleteStudents);
 
@@ -76,6 +83,14 @@ public class StudentPanel extends JPanel {
 		deleteStudentIcon = new ImageIcon(StudentPanel.class.getResource("/res/deleteuser.png")).getImage()
 				.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		lblDeleteStudents.setIcon(new ImageIcon(deleteStudentIcon));
+
+		updateStudentIcon = new ImageIcon(StudentPanel.class.getResource("/res/update.png")).getImage()
+				.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		lblUpdateStudents.setIcon(new ImageIcon(updateStudentIcon));
+
+		viewStudentIcon = new ImageIcon(StudentPanel.class.getResource("/res/viewdata.jpeg")).getImage()
+				.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+		lblViewStudents.setIcon(new ImageIcon(viewStudentIcon));
 
 	}
 }

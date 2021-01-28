@@ -15,6 +15,8 @@ public class Dashboard extends JFrame {
 	private TitlePanel titlePanel;
 	private HomePanel homePanel;
 	private StudentPanel studentPanel;
+	private EmployeePanel employeePanel;
+	private JPanel panelToRemove;
 
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,9 +34,40 @@ public class Dashboard extends JFrame {
 		contentPane.add(titlePanel, BorderLayout.NORTH);
 
 		homePanel = new HomePanel();
-//		contentPane.add(homePanel, BorderLayout.CENTER);
+		contentPane.add(homePanel, BorderLayout.CENTER);
+		panelToRemove = homePanel;
+
+		employeePanel = new EmployeePanel();
 
 		studentPanel = new StudentPanel();
-		contentPane.add(studentPanel, BorderLayout.CENTER);
+
+		sidePanel.addPanel(new SidePanelInterface() {
+
+			@Override
+			public void setPanel(String panel) {
+				// TODO Auto-generated method stub
+				changePanel(panel);
+			}
+		});
+	}
+
+	public void changePanel(String panel) {
+		if (panel.equals("studentPanel")) {
+			contentPane.remove(panelToRemove);
+			contentPane.add(studentPanel, BorderLayout.CENTER);
+			panelToRemove = studentPanel;
+			contentPane.repaint();
+		} else if (panel.equals("homePanel")) {
+			contentPane.remove(panelToRemove);
+			contentPane.add(homePanel, BorderLayout.CENTER);
+			contentPane.repaint();
+			panelToRemove = homePanel;
+		} else if (panel.equals("employeePanel")) {
+			contentPane.remove(panelToRemove);
+			contentPane.add(employeePanel, BorderLayout.CENTER);
+			contentPane.repaint();
+			panelToRemove = employeePanel;
+		}
+
 	}
 }
