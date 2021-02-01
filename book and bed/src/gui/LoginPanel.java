@@ -36,7 +36,7 @@ public class LoginPanel extends JPanel {
 		logoPanel.setBounds(0, 0, 424, 474);
 		logoPanel.setLayout(null);
 		logoPanel.isVisible();
-		logoPanel.setBackground(new Color(0, 128, 128));
+		logoPanel.setBackground(new Color(46, 45, 45));
 		add(logoPanel);
 
 		JLabel logo = new JLabel("");

@@ -17,13 +17,14 @@ public class Dashboard extends JFrame {
 	private StudentPanel studentPanel;
 	private EmployeePanel employeePanel;
 	private JPanel panelToRemove;
+	private KitchenPanel kitchenPanel;
 
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(950, 600));
 
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 255, 255));
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout());
@@ -37,10 +38,6 @@ public class Dashboard extends JFrame {
 		contentPane.add(homePanel, BorderLayout.CENTER);
 		panelToRemove = homePanel;
 
-		employeePanel = new EmployeePanel();
-
-		studentPanel = new StudentPanel();
-
 		sidePanel.addPanel(new SidePanelInterface() {
 
 			@Override
@@ -49,25 +46,44 @@ public class Dashboard extends JFrame {
 				changePanel(panel);
 			}
 		});
+
 	}
 
 	public void changePanel(String panel) {
+
 		if (panel.equals("studentPanel")) {
-			contentPane.remove(panelToRemove);
-			contentPane.add(studentPanel, BorderLayout.CENTER);
-			panelToRemove = studentPanel;
-			contentPane.repaint();
+			if (panelToRemove != studentPanel) {
+				studentPanel = new StudentPanel();
+				contentPane.remove(panelToRemove);
+				contentPane.add(studentPanel, BorderLayout.CENTER);
+				panelToRemove = studentPanel;
+				contentPane.repaint();
+			}
 		} else if (panel.equals("homePanel")) {
-			contentPane.remove(panelToRemove);
-			contentPane.add(homePanel, BorderLayout.CENTER);
-			contentPane.repaint();
-			panelToRemove = homePanel;
+			if (panelToRemove != homePanel) {
+				contentPane.remove(panelToRemove);
+				contentPane.add(homePanel, BorderLayout.CENTER);
+				contentPane.repaint();
+				panelToRemove = homePanel;
+			}
 		} else if (panel.equals("employeePanel")) {
-			contentPane.remove(panelToRemove);
-			contentPane.add(employeePanel, BorderLayout.CENTER);
-			contentPane.repaint();
-			panelToRemove = employeePanel;
+			if (panelToRemove != employeePanel) {
+				employeePanel = new EmployeePanel();
+				contentPane.remove(panelToRemove);
+				contentPane.add(employeePanel, BorderLayout.CENTER);
+				contentPane.repaint();
+				panelToRemove = employeePanel;
+			}
+		} else {
+			if (panelToRemove != kitchenPanel) {
+				kitchenPanel = new KitchenPanel();
+				contentPane.remove(panelToRemove);
+				contentPane.add(kitchenPanel, BorderLayout.CENTER);
+				contentPane.repaint();
+				panelToRemove = kitchenPanel;
+			}
 		}
 
 	}
+
 }

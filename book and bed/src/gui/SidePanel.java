@@ -3,6 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -25,24 +26,24 @@ public class SidePanel extends JPanel {
 	private JLabel employeeLabel;
 	private JLabel kitchenLabel;
 
-	private static final int BASIC_RED = 87;
-	private static final int BASiC_GREEN = 132;
-	private static final int BASIC_BLUE = 117;
-	private static final int SELECTED_RED = 69;
-	private static final int SELECTED_GREEN = 76;
-	private static final int SELECTED_BLUE = 176;
+	private static final int BASIC_RED = 255;
+	private static final int BASiC_GREEN = 255;
+	private static final int BASIC_BLUE = 255;
+	private static final int SELECTED_RED = 242;
+	private static final int SELECTED_GREEN = 173;
+	private static final int SELECTED_BLUE = 50;
 
 	private SidePanelInterface sidePanelInterface;
 
 	public SidePanel() {
 
-		setBackground(new Color(48, 61, 98));
+		setBackground(new Color(220, 175, 30));
 		setBorder(new LineBorder(getBackground()));
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		Dimension dimension = getPreferredSize();
 		dimension.width = 300;
 		dimension.height = 200;
-		setPreferredSize(new Dimension(200, 239));
+		setPreferredSize(new Dimension(221, 358));
 		setPanelLayout(gridBagLayout);
 		setMinimumSize(dimension);
 
@@ -157,6 +158,7 @@ public class SidePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setPanelColor(kitchenPanel);
+				sidePanelInterface.setPanel("kitchen");
 
 			}
 
@@ -182,7 +184,7 @@ public class SidePanel extends JPanel {
 
 	public void setPanelLayout(GridBagLayout gridBagLayout) {
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 46, 46, 49, 49, 31, 0 };
+		gridBagLayout.rowHeights = new int[] { 48, 46, 45, 49, 31, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -193,19 +195,18 @@ public class SidePanel extends JPanel {
 		GridBagConstraints gbc_homePanel = new GridBagConstraints();
 		gbc_homePanel.insets = new Insets(0, 0, 5, 0);
 		gbc_homePanel.fill = GridBagConstraints.HORIZONTAL;
-		gbc_homePanel.anchor = GridBagConstraints.NORTH;
 		gbc_homePanel.gridx = 0;
 		gbc_homePanel.gridy = 1;
 		add(homePanel, gbc_homePanel);
 
 		homeLabel = new JLabel("Home");
+		homeLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		homePanel.add(homeLabel);
 
 		studentPanel = new JPanel();
 		studentPanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
 		studentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		GridBagConstraints gbc_studentsPanel = new GridBagConstraints();
-		gbc_studentsPanel.anchor = GridBagConstraints.NORTH;
 		gbc_studentsPanel.insets = new Insets(0, 0, 5, 0);
 		gbc_studentsPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_studentsPanel.gridx = 0;
@@ -213,13 +214,13 @@ public class SidePanel extends JPanel {
 		add(studentPanel, gbc_studentsPanel);
 
 		studentsLabel = new JLabel("Students");
+		studentsLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		studentPanel.add(studentsLabel);
 
 		employeePanel = new JPanel();
 		employeePanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
 		employeePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		GridBagConstraints gbc_employeePanel = new GridBagConstraints();
-		gbc_employeePanel.anchor = GridBagConstraints.NORTH;
 		gbc_employeePanel.insets = new Insets(0, 0, 5, 0);
 		gbc_employeePanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_employeePanel.gridx = 0;
@@ -227,6 +228,7 @@ public class SidePanel extends JPanel {
 		add(employeePanel, gbc_employeePanel);
 
 		employeeLabel = new JLabel("Employees");
+		employeeLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		employeePanel.add(employeeLabel);
 
 		kitchenPanel = new JPanel();
@@ -239,6 +241,7 @@ public class SidePanel extends JPanel {
 		add(kitchenPanel, gbc_kitchenPanel);
 
 		kitchenLabel = new JLabel("Kitchen");
+		kitchenLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		kitchenPanel.add(kitchenLabel);
 
 	}

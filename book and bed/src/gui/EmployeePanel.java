@@ -5,10 +5,13 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 public class EmployeePanel extends JPanel {
 	private JPanel titlePanel;
@@ -17,6 +20,7 @@ public class EmployeePanel extends JPanel {
 	private JPanel addEmployeePanel;
 	private JPanel updateEmployeePanel;
 	private JPanel deleteEmployeePanel;
+	private JPanel addPayment;
 
 	private JLabel lblViewEmployee;
 	private JLabel lblDeleteEmployee;
@@ -28,16 +32,195 @@ public class EmployeePanel extends JPanel {
 	private Image deleteEmployeeIcon;
 	private Image viewEmployeeIcon;
 
+	private static int BASIC_RED = 178;
+	private static int BASIC_GREEN = 176;
+	private static int BASIC_BLUE = 152;
+
+	private static int SELECTED_RED = 255;
+	private static int SELECTED_GREEN = 255;
+	private static int SELECTED_BLUE = 255;
+
 	public EmployeePanel() {
+
 		setLayout(new BorderLayout());
 		setBackground(new Color(255, 255, 255));
 
 		setComponents();
+		setColor(null);
+
+		viewEmployeePanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(viewEmployeePanel);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		updateEmployeePanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(updateEmployeePanel);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		deleteEmployeePanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(deleteEmployeePanel);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		addEmployeePanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(addEmployeePanel);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		addPayment.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(addPayment);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 	public void setComponents() {
+
 		titlePanel = new JPanel();
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+		titlePanel.setBackground(new Color(227, 187, 58));
+
 		add(titlePanel, BorderLayout.NORTH);
 
 		JLabel lblEmployees = new JLabel("Employees");
@@ -58,7 +241,7 @@ public class EmployeePanel extends JPanel {
 		viewEmployeePanel.add(lblViewEmployee);
 
 		addEmployeePanel = new JPanel();
-		addEmployeePanel.setBounds(343, 63, 296, 65);
+		addEmployeePanel.setBounds(390, 63, 296, 65);
 		componentsPanel.add(addEmployeePanel);
 
 		lblAddEmployee = new JLabel("Add Employee");
@@ -74,7 +257,7 @@ public class EmployeePanel extends JPanel {
 		updateEmployeePanel.add(lblUpdateEmployee);
 
 		deleteEmployeePanel = new JPanel();
-		deleteEmployeePanel.setBounds(343, 179, 296, 65);
+		deleteEmployeePanel.setBounds(390, 179, 296, 65);
 		componentsPanel.add(deleteEmployeePanel);
 
 		lblDeleteEmployee = new JLabel("Delete Employee");
@@ -96,5 +279,34 @@ public class EmployeePanel extends JPanel {
 		viewEmployeeIcon = new ImageIcon(StudentPanel.class.getResource("/res/viewdata.jpeg")).getImage()
 				.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 		lblViewEmployee.setIcon(new ImageIcon(viewEmployeeIcon));
+
+		addPayment = new JPanel();
+		addPayment.setBounds(17, 303, 296, 65);
+		componentsPanel.add(addPayment);
+
+		JLabel lblAddPayment = new JLabel("Add Payment");
+		lblAddPayment.setFont(new Font("Dialog", Font.BOLD, 25));
+		addPayment.add(lblAddPayment);
 	}
+
+	public void setColor(JPanel panel) {
+
+		JPanel[] panels = { addEmployeePanel, deleteEmployeePanel, updateEmployeePanel, viewEmployeePanel, addPayment };
+		if (panel != null) {
+			for (JPanel jPanel : panels) {
+				if (jPanel != panel) {
+					jPanel.setBackground(new Color(BASIC_RED, BASIC_GREEN, BASIC_BLUE));
+					jPanel.setBorder(null);
+				}
+				panel.setBackground(new Color(SELECTED_RED, SELECTED_GREEN, SELECTED_BLUE));
+				panel.setBorder(new LineBorder(new Color(0, 255, 255)));
+			}
+		} else {
+			for (JPanel jPanel : panels) {
+				jPanel.setBackground(new Color(BASIC_RED, BASIC_GREEN, BASIC_BLUE));
+				jPanel.setBorder(null);
+			}
+		}
+	}
+
 }
