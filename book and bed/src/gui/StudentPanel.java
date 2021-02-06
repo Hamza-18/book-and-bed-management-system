@@ -40,11 +40,14 @@ public class StudentPanel extends JPanel {
 
 	private Dimension dim;
 
+	private AddStudentDialog addStudentDialog;
+
 	public StudentPanel() {
 		setLayout(new BorderLayout());
 		setBackground(new Color(255, 255, 255));
 		setComponents();
 		setColor(null);
+		addStudentDialog = new AddStudentDialog();
 		viewStudentPanel.addMouseListener(new MouseListener() {
 
 			@Override
@@ -84,6 +87,7 @@ public class StudentPanel extends JPanel {
 			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(addStudentPanel);
+				addStudentDialog.setVisible(true);
 			}
 
 			@Override
