@@ -12,6 +12,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -40,14 +41,13 @@ public class AddStudentPanel extends JPanel {
 	private JLabel lblNewLabel_14;
 	private JLabel lblNewLabel_15;
 
-	private JTextField studentName;
-	private JTextField fatherName;
-	private JTextField studenId;
-
 	private JRadioButton maleRadioBtn;
 	private JRadioButton femaleRadioBtn;
 	private ButtonGroup gender;
 
+	private JTextField studentName;
+	private JTextField fatherName;
+	private JTextField studendId;
 	private JTextField studentNumber;
 	private JTextField guardianNumber;
 	private JTextField studentEmail;
@@ -135,16 +135,16 @@ public class AddStudentPanel extends JPanel {
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		studenId = new JTextField();
-		studenId.setFont(new Font("Dialog", Font.PLAIN, 14));
-		studenId.setColumns(10);
-		studenId.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		studendId = new JTextField();
+		studendId.setFont(new Font("Dialog", Font.PLAIN, 14));
+		studendId.setColumns(10);
+		studendId.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		GridBagConstraints gbc_studenId = new GridBagConstraints();
 		gbc_studenId.insets = new Insets(0, 0, 5, 5);
 		gbc_studenId.gridx = 1;
 		gbc_studenId.gridy = 1;
 		gbc_studenId.anchor = GridBagConstraints.WEST;
-		panel.add(studenId, gbc_studenId);
+		panel.add(studendId, gbc_studenId);
 
 		lblGender = new JLabel("Gender:");
 		lblGender.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -461,8 +461,35 @@ public class AddStudentPanel extends JPanel {
 
 	}
 
-	public String getData() {
-		return studentName.getText();
+	public boolean getData() {
+		String nameString = studentName.getText();
+		boolean flag = true;
+		if (nameString.equals("")) {
+			JOptionPane.showMessageDialog(this, "Please enter student name");
+			flag = false;
+		}
+
+		return flag;
+	}
+
+	public void Reset() {
+		studentName.setText("");
+		fatherName.setText("");
+		studendId.setText("");
+		studentNumber.setText("");
+		guardianNumber.setText("");
+		studentEmail.setText("");
+		studentBlood.setText("");
+		address.setText("");
+		city.setText("");
+		university.setText("");
+		semester.setText("");
+		admissionDate.setText("");
+		rent.setText("");
+		securityFee.setText("");
+		roomNumber.setText("");
+		department.setText("");
+
 	}
 
 }

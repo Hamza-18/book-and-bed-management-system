@@ -40,6 +40,8 @@ public class EmployeePanel extends JPanel {
 	private static int SELECTED_GREEN = 255;
 	private static int SELECTED_BLUE = 255;
 
+	private AddEmployeeDialog addEmployeeDialog;
+
 	public EmployeePanel() {
 
 		setLayout(new BorderLayout());
@@ -47,6 +49,8 @@ public class EmployeePanel extends JPanel {
 
 		setComponents();
 		setColor(null);
+
+		addEmployeeDialog = new AddEmployeeDialog();
 
 		viewEmployeePanel.addMouseListener(new MouseListener() {
 
@@ -159,6 +163,7 @@ public class EmployeePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(addEmployeePanel);
+				addEmployeeDialog.setVisible(true);
 			}
 
 			@Override

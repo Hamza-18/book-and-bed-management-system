@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -10,17 +11,18 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 
-public class AddStudentDialog extends JDialog {
-	private AddStudentPanel addStudentPanel;
+public class AddEmployeeDialog extends JDialog {
+	private AddEmployeePanel addEmployeePanel;
 	private JPanel buttonPanel;
 	private JButton submitButton;
 	private JButton cancelButton;
 
-	public AddStudentDialog() {
-		setLayout(new BorderLayout());
-		setMinimumSize(new Dimension(650, 600));
-		addStudentPanel = new AddStudentPanel();
-		add(addStudentPanel, BorderLayout.CENTER);
+	public AddEmployeeDialog() {
+		setBackground(Color.WHITE);
+		setSize(new Dimension(550, 333));
+
+		addEmployeePanel = new AddEmployeePanel();
+		getContentPane().add(addEmployeePanel, BorderLayout.CENTER);
 
 		buttonPanel = new JPanel();
 		submitButton = new JButton("Submit");
@@ -32,13 +34,13 @@ public class AddStudentDialog extends JDialog {
 		Dimension dimension = submitButton.getPreferredSize();
 		cancelButton.setPreferredSize(dimension);
 
-		add(buttonPanel, BorderLayout.SOUTH);
+		getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
 		cancelButton.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addStudentPanel.Reset();
+				addEmployeePanel.Reset();
 				setVisible(false);
 			}
 		});
@@ -47,10 +49,9 @@ public class AddStudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (addStudentPanel.getData()) {
-					addStudentPanel.Reset();
-					setVisible(false);
-				}
+				addEmployeePanel.Reset();
+				setVisible(false);
+
 			}
 		});
 

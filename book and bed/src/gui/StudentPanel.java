@@ -25,6 +25,7 @@ public class StudentPanel extends JPanel {
 	private JPanel addStudentPanel;
 	private JPanel updateStudentPanel;
 	private JPanel deleteStudentPanel;
+
 	private Image icon;
 	private Image deleteStudentIcon;
 	private Image updateStudentIcon;
@@ -41,6 +42,8 @@ public class StudentPanel extends JPanel {
 	private Dimension dim;
 
 	private AddStudentDialog addStudentDialog;
+	private UpdateStudentDialog updateStudentDialog;
+	private DeleteStudentDialog deleteStudentDialog;
 
 	public StudentPanel() {
 		setLayout(new BorderLayout());
@@ -48,6 +51,9 @@ public class StudentPanel extends JPanel {
 		setComponents();
 		setColor(null);
 		addStudentDialog = new AddStudentDialog();
+		updateStudentDialog = new UpdateStudentDialog();
+		deleteStudentDialog = new DeleteStudentDialog();
+
 		viewStudentPanel.addMouseListener(new MouseListener() {
 
 			@Override
@@ -127,6 +133,7 @@ public class StudentPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(updateStudentPanel);
+				updateStudentDialog.setVisible(true);
 			}
 
 			@Override
@@ -160,6 +167,7 @@ public class StudentPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(deleteStudentPanel);
+				deleteStudentDialog.setVisible(true);
 			}
 
 			@Override
