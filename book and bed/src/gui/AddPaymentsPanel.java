@@ -9,7 +9,6 @@ import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -19,28 +18,25 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-public class AddEmployeePanel extends JPanel {
+public class AddPaymentsPanel extends JPanel {
+
 	private JTextField employeeName;
 	private JTextField employeeId;
 	private JTextField number;
-	private JComboBox employeeDuration;
 	private JTextField employeeWork;
 
 	private ButtonGroup gender;
-	private JTextField employeeSalary;
-	private JTextField textField;
+	private JTextField employeePayment;
+	private JDatePickerImpl paymentDate;
 
-	private JDatePickerImpl employeeDate;
-
-	public AddEmployeePanel() {
-		setBackground(Color.WHITE);
+	public AddPaymentsPanel() {
 		setComponents();
 	}
 
 	public void setComponents() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 78, 170, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 64, 38, 36, 70, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 64, 38, 28, 93, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -130,27 +126,27 @@ public class AddEmployeePanel extends JPanel {
 		gender.add(maleRadio);
 		gender.add(femaleRadio);
 
-		JLabel lblDuration = new JLabel("Duration:");
-		lblDuration.setFont(new Font("Dialog", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDuration = new GridBagConstraints();
-		gbc_lblDuration.anchor = GridBagConstraints.EAST;
-		gbc_lblDuration.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDuration.gridx = 0;
-		gbc_lblDuration.gridy = 3;
-		add(lblDuration, gbc_lblDuration);
-
-		employeeDuration = new JComboBox();
 		DefaultComboBoxModel comboModel = new DefaultComboBoxModel();
 		comboModel.addElement("Permanent");
 		comboModel.addElement("Temporary");
-		employeeDuration.setModel(comboModel);
 
-		GridBagConstraints gbc_employeeDuration = new GridBagConstraints();
-		gbc_employeeDuration.insets = new Insets(0, 0, 5, 5);
-		gbc_employeeDuration.fill = GridBagConstraints.HORIZONTAL;
-		gbc_employeeDuration.gridx = 1;
-		gbc_employeeDuration.gridy = 3;
-		add(employeeDuration, gbc_employeeDuration);
+		JLabel lblDuration_1_1 = new JLabel("Payment:");
+		lblDuration_1_1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblDuration_1_1 = new GridBagConstraints();
+		gbc_lblDuration_1_1.anchor = GridBagConstraints.EAST;
+		gbc_lblDuration_1_1.insets = new Insets(0, 10, 5, 5);
+		gbc_lblDuration_1_1.gridx = 0;
+		gbc_lblDuration_1_1.gridy = 3;
+		add(lblDuration_1_1, gbc_lblDuration_1_1);
+
+		employeePayment = new JTextField("10");
+		employeePayment.setColumns(10);
+		GridBagConstraints gbc_EmployeePayment = new GridBagConstraints();
+		gbc_EmployeePayment.anchor = GridBagConstraints.WEST;
+		gbc_EmployeePayment.insets = new Insets(0, 0, 5, 5);
+		gbc_EmployeePayment.gridx = 1;
+		gbc_EmployeePayment.gridy = 3;
+		add(employeePayment, gbc_EmployeePayment);
 
 		JLabel lblWork = new JLabel("Work:");
 		lblWork.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -170,32 +166,14 @@ public class AddEmployeePanel extends JPanel {
 		gbc_employeeWork.gridy = 3;
 		add(employeeWork, gbc_employeeWork);
 
-		JLabel lblDuration_1 = new JLabel("Salary:");
-		lblDuration_1.setFont(new Font("Dialog", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDuration_1 = new GridBagConstraints();
-		gbc_lblDuration_1.anchor = GridBagConstraints.EAST;
-		gbc_lblDuration_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblDuration_1.gridx = 0;
-		gbc_lblDuration_1.gridy = 4;
-		add(lblDuration_1, gbc_lblDuration_1);
-
-		employeeSalary = new JTextField();
-		employeeSalary.setColumns(10);
-		GridBagConstraints gbc_employeeSalary = new GridBagConstraints();
-		gbc_employeeSalary.anchor = GridBagConstraints.WEST;
-		gbc_employeeSalary.insets = new Insets(0, 0, 0, 5);
-		gbc_employeeSalary.gridx = 1;
-		gbc_employeeSalary.gridy = 4;
-		add(employeeSalary, gbc_employeeSalary);
-
-		JLabel lblDuration_1_1 = new JLabel("Date:");
-		lblDuration_1_1.setFont(new Font("Dialog", Font.PLAIN, 18));
-		GridBagConstraints gbc_lblDuration_1_1 = new GridBagConstraints();
-		gbc_lblDuration_1_1.anchor = GridBagConstraints.EAST;
-		gbc_lblDuration_1_1.insets = new Insets(0, 0, 0, 5);
-		gbc_lblDuration_1_1.gridx = 2;
-		gbc_lblDuration_1_1.gridy = 4;
-		add(lblDuration_1_1, gbc_lblDuration_1_1);
+		JLabel lblWork_1 = new JLabel("Date:");
+		lblWork_1.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblWork_1 = new GridBagConstraints();
+		gbc_lblWork_1.anchor = GridBagConstraints.EAST;
+		gbc_lblWork_1.insets = new Insets(0, 0, 0, 5);
+		gbc_lblWork_1.gridx = 0;
+		gbc_lblWork_1.gridy = 4;
+		add(lblWork_1, gbc_lblWork_1);
 
 		Properties p = new Properties();
 		p.put("text.today", "Today");
@@ -204,13 +182,14 @@ public class AddEmployeePanel extends JPanel {
 
 		UtilDateModel model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
-		employeeDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		paymentDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
-		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textField.gridx = 3;
-		gbc_textField.gridy = 4;
-		add(employeeDate, gbc_textField);
+		GridBagConstraints gbc_paymentDate = new GridBagConstraints();
+		gbc_paymentDate.anchor = GridBagConstraints.WEST;
+		gbc_paymentDate.insets = new Insets(0, 0, 0, 5);
+		gbc_paymentDate.gridx = 1;
+		gbc_paymentDate.gridy = 4;
+		add(paymentDate, gbc_paymentDate);
 
 	}
 
@@ -219,6 +198,7 @@ public class AddEmployeePanel extends JPanel {
 		employeeId.setText("");
 		employeeWork.setText("");
 		number.setText("");
+		employeePayment.setText("");
 	}
 
 }

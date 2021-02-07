@@ -25,11 +25,17 @@ public class KitchenPanel extends JPanel {
 	private static int SELECTED_GREEN = 255;
 	private static int SELECTED_BLUE = 255;
 
+	private MonthlyKitchenDialog monthlyKitchenDialog;
+	private DailyExpenseDialog dailyExpenseDialog;
+
 	public KitchenPanel() {
 		setLayout(new BorderLayout());
 		setBackground(new Color(255, 255, 255));
 		setComponents();
 		setColor(null);
+
+		monthlyKitchenDialog = new MonthlyKitchenDialog();
+		dailyExpenseDialog = new DailyExpenseDialog();
 
 		dailyPanel.addMouseListener(new MouseListener() {
 
@@ -43,6 +49,7 @@ public class KitchenPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(dailyPanel);
+				dailyExpenseDialog.setVisible(true);
 			}
 
 			@Override
@@ -76,6 +83,7 @@ public class KitchenPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(monthlyPanel);
+				monthlyKitchenDialog.setVisible(true);
 			}
 
 			@Override

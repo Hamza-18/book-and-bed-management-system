@@ -21,6 +21,7 @@ public class EmployeePanel extends JPanel {
 	private JPanel updateEmployeePanel;
 	private JPanel deleteEmployeePanel;
 	private JPanel addPayment;
+	private JPanel viewPayments;
 
 	private JLabel lblViewEmployee;
 	private JLabel lblDeleteEmployee;
@@ -41,6 +42,9 @@ public class EmployeePanel extends JPanel {
 	private static int SELECTED_BLUE = 255;
 
 	private AddEmployeeDialog addEmployeeDialog;
+	private UpdateEmployeeDialog updateEmployeeDialog;
+	private DeleteEmployeeDialog deleteEmployeeDialog;
+	private AddPaymentsDialog addPaymentsDialog;
 
 	public EmployeePanel() {
 
@@ -51,6 +55,9 @@ public class EmployeePanel extends JPanel {
 		setColor(null);
 
 		addEmployeeDialog = new AddEmployeeDialog();
+		updateEmployeeDialog = new UpdateEmployeeDialog();
+		deleteEmployeeDialog = new DeleteEmployeeDialog();
+		addPaymentsDialog = new AddPaymentsDialog();
 
 		viewEmployeePanel.addMouseListener(new MouseListener() {
 
@@ -97,6 +104,7 @@ public class EmployeePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(updateEmployeePanel);
+				updateEmployeeDialog.setVisible(true);
 			}
 
 			@Override
@@ -130,6 +138,7 @@ public class EmployeePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(deleteEmployeePanel);
+				deleteEmployeeDialog.setVisible(true);
 			}
 
 			@Override
@@ -197,6 +206,40 @@ public class EmployeePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(addPayment);
+				addPaymentsDialog.setVisible(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		viewPayments.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(viewPayments);
 			}
 
 			@Override
@@ -257,7 +300,7 @@ public class EmployeePanel extends JPanel {
 		updateEmployeePanel.setBounds(12, 179, 301, 65);
 		componentsPanel.add(updateEmployeePanel);
 
-		lblUpdateEmployee = new JLabel("Update Employee");
+		lblUpdateEmployee = new JLabel("Update Employee ");
 		lblUpdateEmployee.setFont(new Font("Dialog", Font.BOLD, 25));
 		updateEmployeePanel.add(lblUpdateEmployee);
 
@@ -265,7 +308,7 @@ public class EmployeePanel extends JPanel {
 		deleteEmployeePanel.setBounds(390, 179, 296, 65);
 		componentsPanel.add(deleteEmployeePanel);
 
-		lblDeleteEmployee = new JLabel("Delete Employee");
+		lblDeleteEmployee = new JLabel("Delete Employee ");
 		lblDeleteEmployee.setFont(new Font("Dialog", Font.BOLD, 25));
 		deleteEmployeePanel.add(lblDeleteEmployee);
 
@@ -292,11 +335,20 @@ public class EmployeePanel extends JPanel {
 		JLabel lblAddPayment = new JLabel("Add Payment");
 		lblAddPayment.setFont(new Font("Dialog", Font.BOLD, 25));
 		addPayment.add(lblAddPayment);
+
+		viewPayments = new JPanel();
+		viewPayments.setBounds(390, 303, 296, 65);
+		componentsPanel.add(viewPayments);
+
+		JLabel lblViewPayments = new JLabel("View Payments");
+		lblViewPayments.setFont(new Font("Dialog", Font.BOLD, 25));
+		viewPayments.add(lblViewPayments);
 	}
 
 	public void setColor(JPanel panel) {
 
-		JPanel[] panels = { addEmployeePanel, deleteEmployeePanel, updateEmployeePanel, viewEmployeePanel, addPayment };
+		JPanel[] panels = { addEmployeePanel, deleteEmployeePanel, updateEmployeePanel, viewEmployeePanel, addPayment,
+				viewPayments };
 		if (panel != null) {
 			for (JPanel jPanel : panels) {
 				if (jPanel != panel) {
@@ -313,5 +365,4 @@ public class EmployeePanel extends JPanel {
 			}
 		}
 	}
-
 }

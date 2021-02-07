@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -18,6 +19,10 @@ import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.MatteBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 public class AddStudentPanel extends JPanel {
 
@@ -57,7 +62,7 @@ public class AddStudentPanel extends JPanel {
 	private JComboBox employmentType;
 	private JTextField university;
 	private JTextField semester;
-	private JTextField admissionDate;
+	private JDatePickerImpl admissionDate;
 	private JTextField rent;
 	private JTextField securityFee;
 	private JTextField roomNumber;
@@ -171,6 +176,7 @@ public class AddStudentPanel extends JPanel {
 		gbc_femaleRadioBtn.gridy = 2;
 		panel.add(femaleRadioBtn, gbc_femaleRadioBtn);
 
+		maleRadioBtn.setPreferredSize(femaleRadioBtn.getPreferredSize());
 		gender = new ButtonGroup();
 		gender.add(maleRadioBtn);
 		gender.add(femaleRadioBtn);
@@ -387,10 +393,15 @@ public class AddStudentPanel extends JPanel {
 		gbc_lblNewLabel_11.gridy = 8;
 		panel.add(lblNewLabel_11, gbc_lblNewLabel_11);
 
-		admissionDate = new JTextField();
-		admissionDate.setFont(new Font("Dialog", Font.PLAIN, 14));
-		admissionDate.setColumns(10);
-		admissionDate.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		Properties p = new Properties();
+		p.put("text.today", "Today");
+		p.put("text.month", "Month");
+		p.put("text.year", "Year");
+
+		UtilDateModel model = new UtilDateModel();
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		admissionDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+
 		GridBagConstraints gbc_admissionDate = new GridBagConstraints();
 		gbc_admissionDate.insets = new Insets(0, 0, 5, 5);
 		gbc_admissionDate.fill = GridBagConstraints.HORIZONTAL;
@@ -484,7 +495,6 @@ public class AddStudentPanel extends JPanel {
 		city.setText("");
 		university.setText("");
 		semester.setText("");
-		admissionDate.setText("");
 		rent.setText("");
 		securityFee.setText("");
 		roomNumber.setText("");

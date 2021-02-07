@@ -10,11 +10,11 @@ public class UpdateStudentDialog extends JDialog {
 	private SearchPanel searchPanel;
 
 	public UpdateStudentDialog() {
-		setMinimumSize(new Dimension(800, 800));
-		setLayout(new BorderLayout());
+		getContentPane().setLayout(new BorderLayout());
+		setSize(new Dimension(700, 700));
 
 		searchPanel = new SearchPanel();
-		add(searchPanel, BorderLayout.NORTH);
+		getContentPane().add(searchPanel, BorderLayout.NORTH);
 	}
 
 }
