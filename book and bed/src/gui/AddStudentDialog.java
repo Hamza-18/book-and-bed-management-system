@@ -18,7 +18,7 @@ public class AddStudentDialog extends JDialog {
 
 	public AddStudentDialog() {
 		setLayout(new BorderLayout());
-		setMinimumSize(new Dimension(650, 600));
+		setMinimumSize(new Dimension(730, 600));
 		addStudentPanel = new AddStudentPanel();
 		add(addStudentPanel, BorderLayout.CENTER);
 
@@ -47,11 +47,10 @@ public class AddStudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if (addStudentPanel.getData()) {
-					addStudentPanel.Reset();
-					setVisible(false);
-				}
+				addStudentPanel.getData();
+
 			}
+
 		});
 
 	}

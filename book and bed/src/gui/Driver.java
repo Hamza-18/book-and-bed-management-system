@@ -21,8 +21,10 @@ public class Driver {
 			@Override
 			public void passLogin(boolean flag) {
 				// TODO Auto-generated method stub
+//				if (flag) {
 				loginFrame.setVisible(false);
 				dashboard.setVisible(true);
+//				}
 			}
 		});
 	}

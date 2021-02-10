@@ -7,13 +7,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -23,6 +23,8 @@ import javax.swing.border.MatteBorder;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
+import model.Student;
 
 public class AddStudentPanel extends JPanel {
 
@@ -463,7 +465,7 @@ public class AddStudentPanel extends JPanel {
 		roomNumber.setColumns(10);
 		roomNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 		GridBagConstraints gbc_roomNumber = new GridBagConstraints();
-		gbc_roomNumber.anchor = GridBagConstraints.EAST;
+		gbc_roomNumber.anchor = GridBagConstraints.WEST;
 		gbc_roomNumber.gridx = 3;
 		gbc_roomNumber.gridy = 9;
 		panel.add(roomNumber, gbc_roomNumber);
@@ -472,15 +474,40 @@ public class AddStudentPanel extends JPanel {
 
 	}
 
-	public boolean getData() {
-		String nameString = studentName.getText();
-		boolean flag = true;
-		if (nameString.equals("")) {
-			JOptionPane.showMessageDialog(this, "Please enter student name");
-			flag = false;
+	public void getData() {
+		String id = studendId.getText();
+		String name = studentName.getText();
+		String father = this.fatherName.getText();
+		String studentGender;
+		try {
+			studentGender = this.gender.getSelection().getActionCommand();
+		} catch (Exception e) {
+			studentGender = "";
 		}
 
-		return flag;
+		String studentPhone = this.studentNumber.getText();
+		String guardianPhone = this.guardianNumber.getText();
+		String email = this.studentEmail.getText();
+		String bloodGroup = this.studentBlood.getText();
+		String studentAddresss = this.address.getText();
+		String studentCity = this.city.getText();
+		String employement = (String) employmentType.getSelectedItem();
+		String studentUniversity = this.university.getText();
+		String studentSemester = this.semester.getText();
+		String studentDepartment = this.department.getText();
+		Date studentAdmissionDate = (Date) this.admissionDate.getModel().getValue();
+		String studentRent = this.rent.getText();
+		String studentSecurityFee = this.securityFee.getText();
+		String room = this.roomNumber.getText();
+		if (id.equals("")) {
+			new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup, studentAddresss,
+					studentCity, employement, studentUniversity, studentSemester, studentDepartment,
+					studentAdmissionDate, studentRent, studentSecurityFee, room);
+		} else {
+			new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+					studentAddresss, studentCity, employement, studentUniversity, studentSemester, studentDepartment,
+					studentAdmissionDate, studentRent, studentSecurityFee, room);
+		}
 	}
 
 	public void Reset() {
