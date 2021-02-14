@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -17,8 +18,10 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import model.Kitchen;
+
 public class DailyExpense extends JPanel {
-	private JTextField Month;
+	private JTextField dailyExpense;
 
 	private ButtonGroup gender;
 	private JDatePickerImpl date;
@@ -46,14 +49,14 @@ public class DailyExpense extends JPanel {
 		gbc_textField.gridy = 0;
 		add(textField, gbc_textField);
 
-		Month = new JTextField();
-		GridBagConstraints gbc_Month = new GridBagConstraints();
-		gbc_Month.insets = new Insets(0, 0, 5, 5);
-		gbc_Month.anchor = GridBagConstraints.WEST;
-		gbc_Month.gridx = 1;
-		gbc_Month.gridy = 0;
-		add(Month, gbc_Month);
-		Month.setColumns(10);
+		dailyExpense = new JTextField();
+		GridBagConstraints gbc_dailyExpense = new GridBagConstraints();
+		gbc_dailyExpense.insets = new Insets(0, 0, 5, 5);
+		gbc_dailyExpense.anchor = GridBagConstraints.WEST;
+		gbc_dailyExpense.gridx = 1;
+		gbc_dailyExpense.gridy = 0;
+		add(dailyExpense, gbc_dailyExpense);
+		dailyExpense.setColumns(10);
 
 		JLabel lblCnic = new JLabel("Date:");
 		lblCnic.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -87,8 +90,28 @@ public class DailyExpense extends JPanel {
 
 	}
 
+	public Kitchen getData() {
+
+		java.sql.Date monthDate = null;
+		String month = (date.getModel().getMonth() + 1) + "";
+		String day = date.getModel().getDay() + "";
+		String year = date.getModel().getYear() + "";
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+
+		monthDate = Date.valueOf(year + "-" + month + "-" + day);
+
+		String expense = dailyExpense.getText();
+
+		return (new Kitchen(expense, monthDate));
+	}
+
 	public void Reset() {
-		Month.setText("");
+		dailyExpense.setText("");
 	}
 
 }

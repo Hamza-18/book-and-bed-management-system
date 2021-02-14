@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -19,9 +20,10 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import model.Employee;
+
 public class AddEmployeePanel extends JPanel {
 	private JTextField employeeName;
-	private JTextField employeeId;
 	private JTextField number;
 	private JComboBox employeeDuration;
 	private JTextField employeeWork;
@@ -31,6 +33,7 @@ public class AddEmployeePanel extends JPanel {
 	private JTextField textField;
 
 	private JDatePickerImpl employeeDate;
+	private JTextField employeeId;
 
 	public AddEmployeePanel() {
 		setBackground(Color.WHITE);
@@ -73,11 +76,11 @@ public class AddEmployeePanel extends JPanel {
 		gbc_lblCnic.gridy = 0;
 		add(lblCnic, gbc_lblCnic);
 
-		employeeId = new JTextField(10);
+		employeeId = new JTextField();
 		employeeId.setColumns(10);
 		GridBagConstraints gbc_employeeId = new GridBagConstraints();
-		gbc_employeeId.insets = new Insets(0, 0, 5, 0);
 		gbc_employeeId.anchor = GridBagConstraints.WEST;
+		gbc_employeeId.insets = new Insets(0, 0, 5, 0);
 		gbc_employeeId.gridx = 3;
 		gbc_employeeId.gridy = 0;
 		add(employeeId, gbc_employeeId);
@@ -85,7 +88,7 @@ public class AddEmployeePanel extends JPanel {
 		JLabel lblRoom = new JLabel("Number:");
 		lblRoom.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblRoom = new GridBagConstraints();
-		gbc_lblRoom.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblRoom.anchor = GridBagConstraints.EAST;
 		gbc_lblRoom.insets = new Insets(0, 5, 5, 5);
 		gbc_lblRoom.gridx = 0;
 		gbc_lblRoom.gridy = 1;
@@ -126,6 +129,9 @@ public class AddEmployeePanel extends JPanel {
 		add(femaleRadio, gbc_femaleRadio);
 
 		maleRadio.setPreferredSize(femaleRadio.getPreferredSize());
+		maleRadio.setSelected(true);
+		maleRadio.setActionCommand("Male");
+		femaleRadio.setActionCommand("Female");
 		gender = new ButtonGroup();
 		gender.add(maleRadio);
 		gender.add(femaleRadio);
@@ -219,6 +225,35 @@ public class AddEmployeePanel extends JPanel {
 		employeeId.setText("");
 		employeeWork.setText("");
 		number.setText("");
+	}
+
+	public Employee getData() {
+		Employee employee;
+		String id = employeeId.getText();
+		String name = employeeName.getText();
+		String phoneNumber = number.getText();
+		String employeeGender = gender.getSelection().getActionCommand();
+		String duration = (String) employeeDuration.getSelectedItem();
+		String type = employeeWork.getText();
+		String salary = employeeSalary.getText();
+		java.sql.Date date = null;
+		String month = (employeeDate.getModel().getMonth() + 1) + "";
+		String day = employeeDate.getModel().getDay() + "";
+		String year = employeeDate.getModel().getYear() + "";
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+		date = Date.valueOf(year + "-" + month + "-" + day);
+
+		if (id.equals(""))
+			employee = new Employee(name, phoneNumber, employeeGender, duration, type, salary, date);
+		else {
+			employee = new Employee(id, name, phoneNumber, employeeGender, duration, type, salary, date);
+		}
+		return employee;
 	}
 
 }

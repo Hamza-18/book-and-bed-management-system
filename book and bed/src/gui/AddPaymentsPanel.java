@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -17,6 +18,8 @@ import javax.swing.JTextField;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
+
+import model.Employee;
 
 public class AddPaymentsPanel extends JPanel {
 
@@ -81,7 +84,7 @@ public class AddPaymentsPanel extends JPanel {
 		JLabel lblRoom = new JLabel("Number:");
 		lblRoom.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblRoom = new GridBagConstraints();
-		gbc_lblRoom.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblRoom.anchor = GridBagConstraints.EAST;
 		gbc_lblRoom.insets = new Insets(0, 5, 5, 5);
 		gbc_lblRoom.gridx = 0;
 		gbc_lblRoom.gridy = 1;
@@ -120,8 +123,10 @@ public class AddPaymentsPanel extends JPanel {
 		gbc_femaleRadio.gridx = 3;
 		gbc_femaleRadio.gridy = 2;
 		add(femaleRadio, gbc_femaleRadio);
-
+		maleRadio.setActionCommand("Male");
+		femaleRadio.setActionCommand("Female");
 		maleRadio.setPreferredSize(femaleRadio.getPreferredSize());
+		maleRadio.setSelected(true);
 		gender = new ButtonGroup();
 		gender.add(maleRadio);
 		gender.add(femaleRadio);
@@ -139,7 +144,7 @@ public class AddPaymentsPanel extends JPanel {
 		gbc_lblDuration_1_1.gridy = 3;
 		add(lblDuration_1_1, gbc_lblDuration_1_1);
 
-		employeePayment = new JTextField("10");
+		employeePayment = new JTextField("");
 		employeePayment.setColumns(10);
 		GridBagConstraints gbc_EmployeePayment = new GridBagConstraints();
 		gbc_EmployeePayment.anchor = GridBagConstraints.WEST;
@@ -191,6 +196,34 @@ public class AddPaymentsPanel extends JPanel {
 		gbc_paymentDate.gridy = 4;
 		add(paymentDate, gbc_paymentDate);
 
+	}
+
+	public Employee getPayment() {
+		Employee employee;
+		String id = employeeId.getText();
+		String name = employeeName.getText();
+		String phoneNumber = number.getText();
+		String EmployeeGender = gender.getSelection().getActionCommand();
+		String type = employeeWork.getText();
+		String payment = employeePayment.getText();
+		java.sql.Date date = null;
+		String month = (paymentDate.getModel().getMonth() + 1) + "";
+		String day = paymentDate.getModel().getDay() + "";
+		String year = paymentDate.getModel().getYear() + "";
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+		date = Date.valueOf(year + "-" + month + "-" + day);
+
+		if (id.equals(""))
+			employee = new Employee(name, phoneNumber, EmployeeGender, type, payment, date);
+		else {
+			employee = new Employee(name, phoneNumber, EmployeeGender, type, payment, date, id);
+		}
+		return employee;
 	}
 
 	public void Reset() {

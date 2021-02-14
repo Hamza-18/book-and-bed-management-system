@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Employee {
 	private String name;
@@ -10,10 +10,13 @@ public class Employee {
 	private String duration;
 	private String workType;
 	private String salary;
-	private Date date;
+	private java.sql.Date date;
+	private static int count = 0;
+	private static int paymentCount = 0;
 
-	public Employee(String name, String id, String number, String gender, String duration, String work, String salary,
-			Date date) {
+	// Employee Constructor
+	public Employee(String id, String name, String number, String gender, String duration, String work, String salary,
+			java.sql.Date date) {
 
 		setName(name);
 		setId(id);
@@ -25,7 +28,20 @@ public class Employee {
 		setDate(date);
 	}
 
-	public Employee(String name, String id, String number, String gender, String work, String salary, Date date) {
+	public Employee(String name, String number, String gender, String duration, String work, String Salary,
+			java.sql.Date date) {
+		setName(name);
+		setNumber(number);
+		setGender(gender);
+		setDuration(duration);
+		setWorkType(work);
+		setSalary(salary);
+		setDate(date);
+	}
+
+	// Payment Constructor
+	public Employee(String name, String number, String gender, String work, String salary, java.sql.Date date,
+			String id) {
 
 		setName(name);
 		setId(id);
@@ -34,6 +50,12 @@ public class Employee {
 		setWorkType(work);
 		setSalary(salary);
 		setDate(date);
+	}
+
+	public Employee(String name, String number, String gender, String work, String salary, java.sql.Date date) {
+
+		this(name, number, gender, work, salary, date, paymentCount + "");
+		this.paymentCount++;
 	}
 
 	public String getName() {
@@ -100,4 +122,11 @@ public class Employee {
 		this.date = date;
 	}
 
+	public static int getPaymentCount() {
+		return paymentCount;
+	}
+
+	public static void setPaymentCount(int count) {
+		Employee.paymentCount = count;
+	}
 }

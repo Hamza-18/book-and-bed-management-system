@@ -7,7 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -54,7 +54,7 @@ public class AddStudentPanel extends JPanel {
 
 	private JTextField studentName;
 	private JTextField fatherName;
-	private JTextField studendId;
+	private JTextField studentId;
 	private JTextField studentNumber;
 	private JTextField guardianNumber;
 	private JTextField studentEmail;
@@ -142,16 +142,16 @@ public class AddStudentPanel extends JPanel {
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
-		studendId = new JTextField();
-		studendId.setFont(new Font("Dialog", Font.PLAIN, 14));
-		studendId.setColumns(10);
-		studendId.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-		GridBagConstraints gbc_studenId = new GridBagConstraints();
-		gbc_studenId.insets = new Insets(0, 0, 5, 5);
-		gbc_studenId.gridx = 1;
-		gbc_studenId.gridy = 1;
-		gbc_studenId.anchor = GridBagConstraints.WEST;
-		panel.add(studendId, gbc_studenId);
+		studentId = new JTextField();
+		studentId.setFont(new Font("Dialog", Font.PLAIN, 14));
+		studentId.setColumns(10);
+		studentId.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		GridBagConstraints gbc_studentId = new GridBagConstraints();
+		gbc_studentId.insets = new Insets(0, 0, 5, 5);
+		gbc_studentId.gridx = 1;
+		gbc_studentId.gridy = 1;
+		gbc_studentId.anchor = GridBagConstraints.WEST;
+		panel.add(studentId, gbc_studentId);
 
 		lblGender = new JLabel("Gender:");
 		lblGender.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -179,6 +179,9 @@ public class AddStudentPanel extends JPanel {
 		panel.add(femaleRadioBtn, gbc_femaleRadioBtn);
 
 		maleRadioBtn.setPreferredSize(femaleRadioBtn.getPreferredSize());
+		maleRadioBtn.setSelected(true);
+		maleRadioBtn.setActionCommand("Male");
+		femaleRadioBtn.setActionCommand("Female");
 		gender = new ButtonGroup();
 		gender.add(maleRadioBtn);
 		gender.add(femaleRadioBtn);
@@ -474,17 +477,13 @@ public class AddStudentPanel extends JPanel {
 
 	}
 
-	public void getData() {
-		String id = studendId.getText();
+	public Student getData() {
+		Student student;
+
+		String id = studentId.getText();
 		String name = studentName.getText();
 		String father = this.fatherName.getText();
-		String studentGender;
-		try {
-			studentGender = this.gender.getSelection().getActionCommand();
-		} catch (Exception e) {
-			studentGender = "";
-		}
-
+		String studentGender = gender.getSelection().getActionCommand();
 		String studentPhone = this.studentNumber.getText();
 		String guardianPhone = this.guardianNumber.getText();
 		String email = this.studentEmail.getText();
@@ -495,25 +494,41 @@ public class AddStudentPanel extends JPanel {
 		String studentUniversity = this.university.getText();
 		String studentSemester = this.semester.getText();
 		String studentDepartment = this.department.getText();
-		Date studentAdmissionDate = (Date) this.admissionDate.getModel().getValue();
+		Date studentAdmissionDate = getDate();
 		String studentRent = this.rent.getText();
 		String studentSecurityFee = this.securityFee.getText();
 		String room = this.roomNumber.getText();
 		if (id.equals("")) {
-			new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup, studentAddresss,
-					studentCity, employement, studentUniversity, studentSemester, studentDepartment,
+			student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+					studentAddresss, studentCity, employement, studentUniversity, studentSemester, studentDepartment,
 					studentAdmissionDate, studentRent, studentSecurityFee, room);
 		} else {
-			new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+			student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
 					studentAddresss, studentCity, employement, studentUniversity, studentSemester, studentDepartment,
 					studentAdmissionDate, studentRent, studentSecurityFee, room);
 		}
+		return student;
+	}
+
+	public Date getDate() {
+		String month = (admissionDate.getModel().getMonth() + 1) + "";
+		String day = admissionDate.getModel().getDay() + "";
+		String year = admissionDate.getModel().getYear() + "";
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+
+		return Date.valueOf(year + "-" + month + "-" + day);
+
 	}
 
 	public void Reset() {
 		studentName.setText("");
 		fatherName.setText("");
-		studendId.setText("");
+		studentId.setText("");
 		studentNumber.setText("");
 		guardianNumber.setText("");
 		studentEmail.setText("");

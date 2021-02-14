@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.Panel;
+import java.sql.Date;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
@@ -17,9 +18,11 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import model.Kitchen;
+
 public class MonthlyKitchenPanel extends Panel {
 
-	private JTextField Month;
+	private JTextField month;
 	private JTextField monthlyExpense;
 
 	private ButtonGroup gender;
@@ -32,7 +35,7 @@ public class MonthlyKitchenPanel extends Panel {
 	public void setComponents() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 78, 170, 0, 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 64, 38, 28, 93, 0, 0 };
+		gridBagLayout.rowHeights = new int[] { 64, 53, 28, 93, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
@@ -48,14 +51,14 @@ public class MonthlyKitchenPanel extends Panel {
 		gbc_textField.gridy = 0;
 		add(textField, gbc_textField);
 
-		Month = new JTextField();
-		GridBagConstraints gbc_Month = new GridBagConstraints();
-		gbc_Month.insets = new Insets(0, 0, 5, 5);
-		gbc_Month.anchor = GridBagConstraints.WEST;
-		gbc_Month.gridx = 1;
-		gbc_Month.gridy = 0;
-		add(Month, gbc_Month);
-		Month.setColumns(10);
+		month = new JTextField();
+		GridBagConstraints gbc_month = new GridBagConstraints();
+		gbc_month.insets = new Insets(0, 0, 5, 5);
+		gbc_month.anchor = GridBagConstraints.WEST;
+		gbc_month.gridx = 1;
+		gbc_month.gridy = 0;
+		add(month, gbc_month);
+		month.setColumns(10);
 
 		JLabel lblCnic = new JLabel("Date:");
 		lblCnic.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -69,7 +72,7 @@ public class MonthlyKitchenPanel extends Panel {
 		JLabel lblRoom = new JLabel("Expense:");
 		lblRoom.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblRoom = new GridBagConstraints();
-		gbc_lblRoom.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_lblRoom.anchor = GridBagConstraints.EAST;
 		gbc_lblRoom.insets = new Insets(0, 5, 5, 5);
 		gbc_lblRoom.gridx = 0;
 		gbc_lblRoom.gridy = 1;
@@ -107,8 +110,30 @@ public class MonthlyKitchenPanel extends Panel {
 
 	}
 
+	public Kitchen getData() {
+		Kitchen kitchen;
+		String kitchenMonth = month.getText();
+		String expense = monthlyExpense.getText();
+		java.sql.Date monthDate = null;
+		String month = (date.getModel().getMonth() + 1) + "";
+		String day = date.getModel().getDay() + "";
+		String year = date.getModel().getYear() + "";
+		if (month.length() == 1) {
+			month = "0" + month;
+		}
+		if (day.length() == 1) {
+			day = "0" + day;
+		}
+
+		monthDate = Date.valueOf(year + "-" + month + "-" + day);
+
+		kitchen = new Kitchen(kitchenMonth, expense, monthDate);
+
+		return kitchen;
+	}
+
 	public void Reset() {
-		Month.setText("");
+		month.setText("");
 		monthlyExpense.setText("");
 	}
 

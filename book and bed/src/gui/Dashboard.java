@@ -3,10 +3,14 @@ package gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.util.prefs.Preferences;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.Controller;
+import model.Employee;
 
 public class Dashboard extends JFrame {
 
@@ -18,10 +22,18 @@ public class Dashboard extends JFrame {
 	private EmployeePanel employeePanel;
 	private JPanel panelToRemove;
 	private KitchenPanel kitchenPanel;
+	private Preferences dataPreferences;
 
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(950, 600));
+
+		try {
+			Controller.setConnection();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(255, 255, 255));
@@ -37,6 +49,13 @@ public class Dashboard extends JFrame {
 		homePanel = new HomePanel();
 		contentPane.add(homePanel, BorderLayout.CENTER);
 		panelToRemove = homePanel;
+
+		try {
+			dataPreferences = dataPreferences.userRoot().node("PaymentCount");
+			Employee.setPaymentCount(dataPreferences.getInt("empCount", 0));
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 
 		sidePanel.addPanel(new SidePanelInterface() {
 

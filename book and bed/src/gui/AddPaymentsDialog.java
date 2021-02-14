@@ -5,20 +5,29 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.prefs.Preferences;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import model.Controller;
+import model.Employee;
 
 public class AddPaymentsDialog extends JDialog {
 	private AddPaymentsPanel addPaymentsPanel;
 	private JPanel buttonPanel;
 	private JButton submitButton;
 	private JButton cancelButton;
+	private Controller controller;
+	private Preferences dataPreferences;
 
 	public AddPaymentsDialog() {
 		setLayout(new BorderLayout());
 		setSize(new Dimension(550, 320));
+
+		controller = new Controller();
 
 		addPaymentsPanel = new AddPaymentsPanel();
 		add(addPaymentsPanel, BorderLayout.CENTER);
@@ -49,10 +58,21 @@ public class AddPaymentsDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
+				boolean flag = true;
+				Employee employee = addPaymentsPanel.getPayment();
+				dataPreferences = Preferences.userRoot().node("PaymentsCount");
+				dataPreferences.putInt("empCount", Employee.getPaymentCount());
+				try {
+					controller.addPayment(employee);
+				} catch (Exception e) {
+
+					JOptionPane.showMessageDialog(null, "Payment not added");
+				}
+				if (flag)
+					JOptionPane.showMessageDialog(null, "Payment has been added");
 
 			}
 		});
 
 	}
-
 }

@@ -9,7 +9,6 @@ public class Student {
 	private String gender;
 	private String studentNumber;
 	private String guardianNumber;
-	private String emergencyNumber;
 	private String studentEmail;
 	private String bloodGroup;
 	private String address;
@@ -24,19 +23,17 @@ public class Student {
 	private String roomNumber;
 	private static int count = 0;
 
-	public Student(String Id, String studentName, String fatherName, String gender, String studentNumber,
+	public Student(String id, String studentName, String fatherName, String gender, String studentNumber,
 
 			String guardianNumber, String studentEmail, String bloodGroup, String address, String city,
 			String employment, String university, String semester, String department, Date admissiondate, String rent,
 			String securityFee, String roomNumber) {
-
-		setId(Id);
+		setId(id);
 		setName(studentName);
 		setFatherName(fatherName);
 		setGender(gender);
 		setStudentNumber(studentNumber);
 		setGuardianNumber(guardianNumber);
-		setEmergencyNumber(emergencyNumber);
 		setStudentEmail(studentEmail);
 		setBloodGroup(bloodGroup);
 		setAddress(address);
@@ -49,6 +46,7 @@ public class Student {
 		setRent(rent);
 		setSecurityFee(securityFee);
 		setRoomNumber(roomNumber);
+
 	}
 
 	public Student(String studentName, String fatherName, String gender, String studentNumber, String guardianNumber,
@@ -56,10 +54,24 @@ public class Student {
 			String semester, String department, Date admissiondate, String rent, String securityFee,
 			String roomNumber) {
 
-		this(count + "", studentName, fatherName, gender, studentNumber, guardianNumber, studentEmail, bloodGroup,
-				address, city, employment, university, semester, department, admissiondate, rent, securityFee,
-				roomNumber);
-		this.count++;
+		setName(studentName);
+		setFatherName(fatherName);
+		setGender(gender);
+		setStudentNumber(studentNumber);
+		setGuardianNumber(guardianNumber);
+		setStudentEmail(studentEmail);
+		setBloodGroup(bloodGroup);
+		setAddress(address);
+		setCity(city);
+		setEmployment(employment);
+		setUniversity(university);
+		setSemester(semester);
+		setDepartment(department);
+		setAdmissionDate(admissiondate);
+		setRent(rent);
+		setSecurityFee(securityFee);
+		setRoomNumber(roomNumber);
+
 	}
 
 	public String getId() {
@@ -110,15 +122,6 @@ public class Student {
 	public void setGuardianNumber(String guardianNumber) {
 //		if (guardianNumber.length() > 10)
 		this.guardianNumber = guardianNumber;
-	}
-
-	public String getEmergencyNumber() {
-		return emergencyNumber;
-	}
-
-	public void setEmergencyNumber(String emergencyNumber) {
-//		if (emergencyNumber.length() > 10)
-		this.emergencyNumber = emergencyNumber;
 	}
 
 	public String getStudentEmail() {
