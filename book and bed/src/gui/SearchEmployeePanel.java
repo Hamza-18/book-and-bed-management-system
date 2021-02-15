@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,11 +18,41 @@ public class SearchEmployeePanel extends JPanel {
 	private JTextField employeeName;
 	private JTextField employeeId;
 	private JTextField employeeWork;
+	private JButton searchBtn;
+	private UpdateEmployeeInterface updateEmployeeInterface;
 
 	public SearchEmployeePanel() {
-
 		setComponents();
 
+		searchBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				String query;
+				String name = "";
+				String work = "";
+				long id;
+
+				if (employeeName.getText() != null)
+					name = employeeName.getText();
+
+				if (employeeWork.getText() != null)
+					work = employeeWork.getText();
+				if (employeeId.getText().equals(""))
+					id = -1;
+				else {
+					id = Long.parseLong(employeeId.getText());
+				}
+				query = "where Name = " + "'" + name + "'" + " or EmployeeId = " + "'" + id + "'" + " or Work_Type = "
+						+ "'" + work + "'";
+				updateEmployeeInterface.getQuery(query);
+			}
+		});
+	}
+
+	public void setInterface(UpdateEmployeeInterface updateEmployeeInterface) {
+		this.updateEmployeeInterface = updateEmployeeInterface;
 	}
 
 	public void setComponents() {
@@ -86,7 +118,7 @@ public class SearchEmployeePanel extends JPanel {
 		gbc_employeeWork.gridy = 1;
 		add(employeeWork, gbc_employeeWork);
 
-		JButton searchBtn = new JButton("Search");
+		searchBtn = new JButton("Search");
 		searchBtn.setFont(new Font("Dialog", Font.BOLD, 15));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.gridx = 3;

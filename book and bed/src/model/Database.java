@@ -39,6 +39,7 @@ public class Database {
 	}
 
 	public void addEmployee(Employee employee) throws SQLException {
+
 		String checkId = "Select * from Employees";
 		Statement stmt = connection.createStatement();
 		String addData = "insert into Employees values(?,?,?,?,?,?,?,?)";
@@ -172,6 +173,34 @@ public class Database {
 
 		}
 
+	}
+
+	public ArrayList<Employee> getEmployees(String query) throws SQLException {
+		employees.clear();
+		String getDb;
+		if (query == null)
+			getDb = "select * from Employees ";
+		else {
+			getDb = "select * from Employees ";
+			getDb += query;
+		}
+		System.out.println(getDb);
+		Statement selectStmt = connection.createStatement();
+		ResultSet checkResult = selectStmt.executeQuery(getDb);
+		while (checkResult.next()) {
+			String id = checkResult.getLong("EmployeeId") + "";
+			String name = checkResult.getString("Name");
+			String number = checkResult.getString("Phone_Number");
+			String gender = checkResult.getString("Gender");
+			String duration = checkResult.getString("Duration");
+			String type = checkResult.getString("Work_Type");
+			String salary = checkResult.getString("Salary");
+			Date date = checkResult.getDate("Date");
+			employees.add(new Employee(id, name, number, gender, duration, type, salary, date));
+		}
+		checkResult.close();
+		selectStmt.close();
+		return employees;
 	}
 
 	public List<Student> getStudents() {

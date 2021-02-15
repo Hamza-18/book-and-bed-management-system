@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Controller {
 	private static Database database = new Database();;
@@ -27,6 +28,16 @@ public class Controller {
 
 	public void addStudent(Student student) throws SQLException {
 		database.addStudents(student);
+	}
+
+	public ArrayList<Employee> getEmployees(String query) {
+		try {
+			return database.getEmployees(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }

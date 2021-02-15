@@ -14,8 +14,10 @@ import javax.swing.border.LineBorder;
 public class KitchenPanel extends JPanel {
 	private JPanel titlePanel;
 	private JPanel componenetsPanel;
-	private JPanel monthlyPanel;
-	private JPanel dailyPanel;
+	private JPanel monthlyExpense;
+	private JPanel viewDailyExpense;
+	private JPanel dailyExpense;
+	private JPanel viewMonthPanel;
 
 	private static int BASIC_RED = 178;
 	private static int BASIC_GREEN = 176;
@@ -37,7 +39,7 @@ public class KitchenPanel extends JPanel {
 		monthlyKitchenDialog = new MonthlyKitchenDialog();
 		dailyExpenseDialog = new DailyExpenseDialog();
 
-		dailyPanel.addMouseListener(new MouseListener() {
+		dailyExpense.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -48,7 +50,7 @@ public class KitchenPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				setColor(dailyPanel);
+				setColor(dailyExpense);
 				dailyExpenseDialog.setVisible(true);
 			}
 
@@ -71,7 +73,7 @@ public class KitchenPanel extends JPanel {
 			}
 		});
 
-		monthlyPanel.addMouseListener(new MouseListener() {
+		monthlyExpense.addMouseListener(new MouseListener() {
 
 			@Override
 			public void mouseReleased(MouseEvent arg0) {
@@ -82,8 +84,74 @@ public class KitchenPanel extends JPanel {
 			@Override
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				setColor(monthlyPanel);
+				setColor(monthlyExpense);
 				monthlyKitchenDialog.setVisible(true);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		viewDailyExpense.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(viewDailyExpense);
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
+		viewMonthPanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setColor(viewMonthPanel);
 			}
 
 			@Override
@@ -121,26 +189,42 @@ public class KitchenPanel extends JPanel {
 		componenetsPanel.setBackground(new Color(255, 255, 255));
 		add(componenetsPanel, BorderLayout.CENTER);
 
-		monthlyPanel = new JPanel();
-		monthlyPanel.setBounds(12, 69, 261, 70);
-		componenetsPanel.add(monthlyPanel);
+		monthlyExpense = new JPanel();
+		monthlyExpense.setBounds(12, 201, 329, 61);
+		componenetsPanel.add(monthlyExpense);
 
 		JLabel lblMonthlyExpence = new JLabel("Monthly Expense");
 		lblMonthlyExpence.setFont(new Font("Dialog", Font.BOLD, 25));
-		monthlyPanel.add(lblMonthlyExpence);
+		monthlyExpense.add(lblMonthlyExpence);
 
-		dailyPanel = new JPanel();
-		dailyPanel.setBounds(318, 69, 261, 70);
-		componenetsPanel.add(dailyPanel);
+		viewDailyExpense = new JPanel();
+		viewDailyExpense.setBounds(376, 69, 294, 67);
+		componenetsPanel.add(viewDailyExpense);
 
-		JLabel lblDailyExpence = new JLabel("Daily Expense");
+		JLabel lblDailyExpence = new JLabel("View Daily Expense");
 		lblDailyExpence.setFont(new Font("Dialog", Font.BOLD, 25));
-		dailyPanel.add(lblDailyExpence);
+		viewDailyExpense.add(lblDailyExpence);
+
+		viewMonthPanel = new JPanel();
+		viewMonthPanel.setBounds(12, 69, 329, 67);
+		componenetsPanel.add(viewMonthPanel);
+
+		JLabel viewMonthlyExpense = new JLabel("View Monthly Expense");
+		viewMonthlyExpense.setFont(new Font("Dialog", Font.BOLD, 25));
+		viewMonthPanel.add(viewMonthlyExpense);
+
+		dailyExpense = new JPanel();
+		dailyExpense.setBounds(376, 201, 294, 61);
+		componenetsPanel.add(dailyExpense);
+
+		JLabel lblDailyExpense = new JLabel("Daily Expense");
+		lblDailyExpense.setFont(new Font("Dialog", Font.BOLD, 25));
+		dailyExpense.add(lblDailyExpense);
 	}
 
 	public void setColor(JPanel panel) {
 
-		JPanel[] panels = { monthlyPanel, dailyPanel };
+		JPanel[] panels = { monthlyExpense, viewDailyExpense, dailyExpense, viewMonthPanel };
 		if (panel != null) {
 			for (JPanel jPanel : panels) {
 				if (jPanel != panel) {
@@ -157,5 +241,4 @@ public class KitchenPanel extends JPanel {
 			}
 		}
 	}
-
 }

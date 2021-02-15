@@ -45,6 +45,7 @@ public class EmployeePanel extends JPanel {
 	private UpdateEmployeeDialog updateEmployeeDialog;
 	private DeleteEmployeeDialog deleteEmployeeDialog;
 	private AddPaymentsDialog addPaymentsDialog;
+	private ViewEmployeeDialog viewEmployeeDialog;
 
 	public EmployeePanel() {
 
@@ -58,7 +59,7 @@ public class EmployeePanel extends JPanel {
 		updateEmployeeDialog = new UpdateEmployeeDialog();
 		deleteEmployeeDialog = new DeleteEmployeeDialog();
 		addPaymentsDialog = new AddPaymentsDialog();
-
+		viewEmployeeDialog = new ViewEmployeeDialog(null);
 		viewEmployeePanel.addMouseListener(new MouseListener() {
 
 			@Override
@@ -71,6 +72,7 @@ public class EmployeePanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(viewEmployeePanel);
+				viewEmployeeDialog.setData();
 			}
 
 			@Override
