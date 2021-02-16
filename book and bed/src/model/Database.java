@@ -43,7 +43,7 @@ public class Database {
 		String checkId = "Select * from Employees";
 		Statement stmt = connection.createStatement();
 		String addData = "insert into Employees values(?,?,?,?,?,?,?,?)";
-		String addDataTwo = "insert into Employees(Name,Phone_Number, Gender, Duration, Work_Type, Salary, Date) Values (?,?,?,?,?,?,?)";
+		String addDataTwo = "insert into Employees(Name,Phone_Number, Gender, Duration, Designation, Salary, Date) Values (?,?,?,?,?,?,?)";
 		PreparedStatement Insertstmt = connection.prepareStatement(addData);
 		ResultSet checkResult = stmt.executeQuery(checkId);
 		if (employee.getId() != null) {
@@ -193,7 +193,7 @@ public class Database {
 			String number = checkResult.getString("Phone_Number");
 			String gender = checkResult.getString("Gender");
 			String duration = checkResult.getString("Duration");
-			String type = checkResult.getString("Work_Type");
+			String type = checkResult.getString("Designation");
 			String salary = checkResult.getString("Salary");
 			Date date = checkResult.getDate("Date");
 			employees.add(new Employee(id, name, number, gender, duration, type, salary, date));
@@ -201,6 +201,14 @@ public class Database {
 		checkResult.close();
 		selectStmt.close();
 		return employees;
+	}
+
+	public void deleteEmployee(String query) throws SQLException {
+		Statement stmt = connection.createStatement();
+		PreparedStatement deleteStmt = connection.prepareStatement(query);
+		deleteStmt.execute();
+		stmt.close();
+
 	}
 
 	public List<Student> getStudents() {

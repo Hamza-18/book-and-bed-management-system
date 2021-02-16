@@ -16,6 +16,7 @@ public class DeleteStudentDialog extends JDialog {
 
 		searchPanel = new SearchPanel();
 		add(searchPanel, BorderLayout.NORTH);
+
 	}
 
 }

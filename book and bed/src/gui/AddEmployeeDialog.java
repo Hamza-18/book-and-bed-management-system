@@ -26,7 +26,7 @@ public class AddEmployeeDialog extends JDialog {
 
 	public AddEmployeeDialog() {
 		setBackground(Color.WHITE);
-		setSize(new Dimension(550, 333));
+		setSize(new Dimension(600, 333));
 
 		controller = new Controller();
 

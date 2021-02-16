@@ -8,7 +8,7 @@ import model.Employee;
 
 public class EmployeeTableModel extends AbstractTableModel {
 	private ArrayList<Employee> employeeList;
-	private String[] columnName = { "EmployeeId", "Name", "PhoneNumber", "Gender", "Duration", "Work_Type", "Salary",
+	private String[] columnName = { "EmployeeId", "Name", "PhoneNumber", "Gender", "Duration", "Designation", "Salary",
 			"Date" };
 
 	public EmployeeTableModel() {

@@ -44,7 +44,7 @@ public class SearchEmployeePanel extends JPanel {
 				else {
 					id = Long.parseLong(employeeId.getText());
 				}
-				query = "where Name = " + "'" + name + "'" + " or EmployeeId = " + "'" + id + "'" + " or Work_Type = "
+				query = "where Name = " + "'" + name + "'" + " or EmployeeId = " + "'" + id + "'" + " or Designation = "
 						+ "'" + work + "'";
 				updateEmployeeInterface.getQuery(query);
 			}
@@ -100,11 +100,11 @@ public class SearchEmployeePanel extends JPanel {
 		gbc_employeeId.gridy = 0;
 		add(employeeId, gbc_employeeId);
 
-		JLabel lblRoom = new JLabel("Work:");
+		JLabel lblRoom = new JLabel("Designation:");
 		lblRoom.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblRoom = new GridBagConstraints();
 		gbc_lblRoom.anchor = GridBagConstraints.EAST;
-		gbc_lblRoom.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRoom.insets = new Insets(0, 5, 5, 5);
 		gbc_lblRoom.gridx = 0;
 		gbc_lblRoom.gridy = 1;
 		add(lblRoom, gbc_lblRoom);
@@ -121,8 +121,9 @@ public class SearchEmployeePanel extends JPanel {
 		searchBtn = new JButton("Search");
 		searchBtn.setFont(new Font("Dialog", Font.BOLD, 15));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
+		gbc_btnSearch.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSearch.gridx = 3;
-		gbc_btnSearch.gridy = 2;
+		gbc_btnSearch.gridy = 1;
 		add(searchBtn, gbc_btnSearch);
 
 	}

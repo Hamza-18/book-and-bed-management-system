@@ -91,4 +91,5 @@ public class SearchPanel extends JPanel {
 		add(searchBtn, gbc_btnSearch);
 
 	}
+
 }

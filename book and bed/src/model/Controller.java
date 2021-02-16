@@ -40,4 +40,8 @@ public class Controller {
 		return null;
 	}
 
+	public void deleteEmployee(String query) throws SQLException {
+		database.deleteEmployee(query);
+	}
+
 }

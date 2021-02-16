@@ -158,7 +158,7 @@ public class AddEmployeePanel extends JPanel {
 		gbc_employeeDuration.gridy = 3;
 		add(employeeDuration, gbc_employeeDuration);
 
-		JLabel lblWork = new JLabel("Work:");
+		JLabel lblWork = new JLabel("Designation:");
 		lblWork.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblWork = new GridBagConstraints();
 		gbc_lblWork.anchor = GridBagConstraints.EAST;
@@ -170,7 +170,7 @@ public class AddEmployeePanel extends JPanel {
 		employeeWork = new JTextField();
 		employeeWork.setColumns(10);
 		GridBagConstraints gbc_employeeWork = new GridBagConstraints();
-		gbc_employeeWork.insets = new Insets(0, 0, 5, 0);
+		gbc_employeeWork.insets = new Insets(0, 5, 5, 0);
 		gbc_employeeWork.anchor = GridBagConstraints.WEST;
 		gbc_employeeWork.gridx = 3;
 		gbc_employeeWork.gridy = 3;
