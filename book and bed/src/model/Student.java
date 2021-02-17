@@ -21,6 +21,7 @@ public class Student {
 	private String rent;
 	private String securityFee;
 	private String roomNumber;
+	private String resident;
 	private static int count = 0;
 
 	public Student(String id, String studentName, String fatherName, String gender, String studentNumber,
@@ -47,6 +48,17 @@ public class Student {
 		setSecurityFee(securityFee);
 		setRoomNumber(roomNumber);
 
+	}
+
+	public Student(String id, String studentName, String fatherName, String gender, String studentNumber,
+
+			String guardianNumber, String studentEmail, String bloodGroup, String address, String city,
+			String employment, String university, String semester, String department, Date admissiondate, String rent,
+			String securityFee, String roomNumber, String resident) {
+
+		this(id, studentName, fatherName, gender, studentNumber, guardianNumber, studentEmail, bloodGroup, address,
+				city, employment, university, semester, department, admissiondate, rent, securityFee, roomNumber);
+		setResident(resident);
 	}
 
 	public Student(String studentName, String fatherName, String gender, String studentNumber, String guardianNumber,
@@ -111,8 +123,7 @@ public class Student {
 	}
 
 	public void setStudentNumber(String studentNumber) {
-		if (studentNumber.length() > 10)
-			this.studentNumber = studentNumber;
+		this.studentNumber = studentNumber;
 	}
 
 	public String getGuardianNumber() {
@@ -120,7 +131,6 @@ public class Student {
 	}
 
 	public void setGuardianNumber(String guardianNumber) {
-//		if (guardianNumber.length() > 10)
 		this.guardianNumber = guardianNumber;
 	}
 
@@ -218,6 +228,14 @@ public class Student {
 
 	public void setRoomNumber(String roomNumber) {
 		this.roomNumber = roomNumber;
+	}
+
+	public void setResident(String resident) {
+		this.resident = resident;
+	}
+
+	public String getResident() {
+		return resident;
 	}
 
 }

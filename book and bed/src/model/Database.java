@@ -183,7 +183,6 @@ public class Database {
 			getDb = "select * from Employees ";
 			getDb += query;
 		}
-		System.out.println(getDb);
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);
 		while (checkResult.next()) {
@@ -202,16 +201,48 @@ public class Database {
 		return employees;
 	}
 
-	public ArrayList<Employee> getPayments(String query) throws SQLException {
-		employees.clear();
+	public ArrayList<Student> getStudents(String query) throws SQLException {
+		students.clear();
 		String getDb;
 		if (query == null)
-			getDb = "select * from EmployeePayments ";
+			getDb = "select * from Students";
 		else {
-			getDb = "select * from EmployeePayments ";
+			getDb = "select * from Students";
 			getDb += query;
 		}
-		System.out.println(getDb);
+		Statement selectStmt = connection.createStatement();
+		ResultSet checkResult = selectStmt.executeQuery(getDb);
+		while (checkResult.next()) {
+			String id = checkResult.getLong("StudentId") + "";
+			String studentName = checkResult.getString("StudentName");
+			String fatherName = checkResult.getString("FatherName");
+			String gender = checkResult.getString("Gender");
+			String studentNumber = checkResult.getString("StudentNumber");
+			String guardianNumber = checkResult.getString("GuardianNumber");
+			String email = checkResult.getString("Email");
+			String blood = checkResult.getString("BloodGroup");
+			String address = checkResult.getString("Address");
+			String city = checkResult.getString("City");
+			String employment = checkResult.getString("Employment");
+			String uni = checkResult.getString("University");
+			String sem = checkResult.getString("Semester");
+			String department = checkResult.getString("Department");
+			Date date = checkResult.getDate("AdmissionDate");
+			String rent = checkResult.getString("Rent");
+			String fee = checkResult.getString("SecurityFee");
+			String room = checkResult.getString("RoomNumber");
+			String resident = checkResult.getString("Resident");
+			students.add(new Student(id, studentName, fatherName, gender, studentNumber, guardianNumber, email, blood,
+					address, city, employment, uni, sem, department, date, rent, fee, room, resident));
+		}
+		checkResult.close();
+		selectStmt.close();
+		return students;
+	}
+
+	public ArrayList<Employee> getPayments(String query) throws SQLException {
+		employees.clear();
+		String getDb = "select * from EmployeePayments";
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);
 		while (checkResult.next()) {
@@ -261,6 +292,14 @@ public class Database {
 	}
 
 	public void deleteEmployee(String query) throws SQLException {
+		Statement stmt = connection.createStatement();
+		PreparedStatement deleteStmt = connection.prepareStatement(query);
+		deleteStmt.execute();
+		stmt.close();
+
+	}
+
+	public void deleteStudent(String query) throws SQLException {
 		Statement stmt = connection.createStatement();
 		PreparedStatement deleteStmt = connection.prepareStatement(query);
 		deleteStmt.execute();

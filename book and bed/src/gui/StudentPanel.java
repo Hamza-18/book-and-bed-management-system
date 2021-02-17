@@ -44,6 +44,7 @@ public class StudentPanel extends JPanel {
 	private AddStudentDialog addStudentDialog;
 	private UpdateStudentDialog updateStudentDialog;
 	private DeleteStudentDialog deleteStudentDialog;
+	private ViewStudentsDialog viewStudentsDialog;
 
 	public StudentPanel() {
 		setLayout(new BorderLayout());
@@ -53,6 +54,7 @@ public class StudentPanel extends JPanel {
 		addStudentDialog = new AddStudentDialog();
 		updateStudentDialog = new UpdateStudentDialog();
 		deleteStudentDialog = new DeleteStudentDialog();
+		viewStudentsDialog = new ViewStudentsDialog(null);
 
 		viewStudentPanel.addMouseListener(new MouseListener() {
 
@@ -66,6 +68,7 @@ public class StudentPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(viewStudentPanel);
+				viewStudentsDialog.setData();
 			}
 
 			@Override

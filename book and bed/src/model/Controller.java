@@ -70,8 +70,21 @@ public class Controller {
 		return null;
 	}
 
+	public ArrayList<Student> getStudents(String query) {
+		try {
+			return database.getStudents(query);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void deleteEmployee(String query) throws SQLException {
 		database.deleteEmployee(query);
+	}
+
+	public void deleteStudent(String query) throws SQLException {
+		database.deleteStudent(query);
 	}
 
 }
