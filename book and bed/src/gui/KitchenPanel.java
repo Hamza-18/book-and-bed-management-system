@@ -29,6 +29,7 @@ public class KitchenPanel extends JPanel {
 
 	private MonthlyKitchenDialog monthlyKitchenDialog;
 	private DailyExpenseDialog dailyExpenseDialog;
+	private ViewMonthlyExpenseDialog viewMonthlyExpenseDialog;
 
 	public KitchenPanel() {
 		setLayout(new BorderLayout());
@@ -119,6 +120,8 @@ public class KitchenPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(viewDailyExpense);
+				viewMonthlyExpenseDialog = new ViewMonthlyExpenseDialog(null, "Daily");
+				viewMonthlyExpenseDialog.setDailyData();
 			}
 
 			@Override
@@ -152,6 +155,8 @@ public class KitchenPanel extends JPanel {
 			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				setColor(viewMonthPanel);
+				viewMonthlyExpenseDialog = new ViewMonthlyExpenseDialog(null, "Monthly");
+				viewMonthlyExpenseDialog.setMonthlyData();
 			}
 
 			@Override

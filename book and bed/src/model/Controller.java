@@ -50,6 +50,26 @@ public class Controller {
 		return null;
 	}
 
+	public ArrayList<Kitchen> getMonthlyExpense() {
+		try {
+			return database.getMonthlyExpense();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public ArrayList<Kitchen> getDailyExpense() {
+		try {
+			return database.getDailyExpense();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void deleteEmployee(String query) throws SQLException {
 		database.deleteEmployee(query);
 	}

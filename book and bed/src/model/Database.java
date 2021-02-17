@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Database {
 	private static final String DATABASE = "BooknBed";
@@ -110,7 +109,7 @@ public class Database {
 		PreparedStatement Insertstmt = connection.prepareStatement(addData);
 
 		Insertstmt = connection.prepareStatement(addData);
-		Insertstmt.setString(1, kitchen.getExpense());
+		Insertstmt.setDate(1, (Date) kitchen.getDate());
 		Insertstmt.setString(2, kitchen.getExpense());
 		Insertstmt.execute();
 
@@ -230,28 +229,43 @@ public class Database {
 		return employees;
 	}
 
+	public ArrayList<Kitchen> getMonthlyExpense() throws SQLException {
+		monthlyExpense.clear();
+		String query = "Select * from KitchenMonthlyExpense";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		while (checkResult.next()) {
+			String month = checkResult.getString("Month");
+			Date date = checkResult.getDate("Date");
+			String expense = checkResult.getString("Expense");
+
+			monthlyExpense.add(new Kitchen(month, expense, date));
+		}
+
+		return monthlyExpense;
+	}
+
+	public ArrayList<Kitchen> getDailyExpense() throws SQLException {
+		monthlyExpense.clear();
+		String query = "Select * from KitchenDailyExpense";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		while (checkResult.next()) {
+			Date date = checkResult.getDate("Date");
+			String expense = checkResult.getString("Expense");
+
+			monthlyExpense.add(new Kitchen(expense, date));
+		}
+
+		return monthlyExpense;
+	}
+
 	public void deleteEmployee(String query) throws SQLException {
 		Statement stmt = connection.createStatement();
 		PreparedStatement deleteStmt = connection.prepareStatement(query);
 		deleteStmt.execute();
 		stmt.close();
 
-	}
-
-	public List<Student> getStudents() {
-		return students;
-	}
-
-	public List<Employee> getemEmployees() {
-		return employees;
-	}
-
-	public List<Kitchen> getMonthlyExpense() {
-		return monthlyExpense;
-	}
-
-	public List<Kitchen> getDailyExpense() {
-		return dailyExpense;
 	}
 
 }
