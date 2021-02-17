@@ -203,6 +203,33 @@ public class Database {
 		return employees;
 	}
 
+	public ArrayList<Employee> getPayments(String query) throws SQLException {
+		employees.clear();
+		String getDb;
+		if (query == null)
+			getDb = "select * from EmployeePayments ";
+		else {
+			getDb = "select * from EmployeePayments ";
+			getDb += query;
+		}
+		System.out.println(getDb);
+		Statement selectStmt = connection.createStatement();
+		ResultSet checkResult = selectStmt.executeQuery(getDb);
+		while (checkResult.next()) {
+			String id = checkResult.getLong("EmployeeId") + "";
+			String name = checkResult.getString("EmployeeName");
+			String number = checkResult.getString("PhoneNumber");
+			String gender = checkResult.getString("Gender");
+			String type = checkResult.getString("Designation");
+			String salary = checkResult.getString("Payment");
+			Date date = checkResult.getDate("Date");
+			employees.add(new Employee(name, number, gender, type, salary, date, id));
+		}
+		checkResult.close();
+		selectStmt.close();
+		return employees;
+	}
+
 	public void deleteEmployee(String query) throws SQLException {
 		Statement stmt = connection.createStatement();
 		PreparedStatement deleteStmt = connection.prepareStatement(query);

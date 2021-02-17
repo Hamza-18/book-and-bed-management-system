@@ -40,6 +40,16 @@ public class Controller {
 		return null;
 	}
 
+	public ArrayList<Employee> getPayments(String query) {
+		try {
+			return database.getPayments(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 	public void deleteEmployee(String query) throws SQLException {
 		database.deleteEmployee(query);
 	}

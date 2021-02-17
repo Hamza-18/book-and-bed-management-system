@@ -153,7 +153,7 @@ public class AddPaymentsPanel extends JPanel {
 		gbc_EmployeePayment.gridy = 3;
 		add(employeePayment, gbc_EmployeePayment);
 
-		JLabel lblWork = new JLabel("Work:");
+		JLabel lblWork = new JLabel("Designation:");
 		lblWork.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblWork = new GridBagConstraints();
 		gbc_lblWork.anchor = GridBagConstraints.EAST;
