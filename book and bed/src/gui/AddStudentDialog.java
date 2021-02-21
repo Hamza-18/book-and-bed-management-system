@@ -20,14 +20,17 @@ public class AddStudentDialog extends JDialog {
 	private JButton submitButton;
 	private JButton cancelButton;
 	private Controller controller;
+	private boolean updateStudent;
 
 	public AddStudentDialog(Student student) {
 		setLayout(new BorderLayout());
 		setMinimumSize(new Dimension(730, 600));
-		if (student == null)
+		if (student == null) {
 			addStudentPanel = new AddStudentPanel();
-		else {
+			updateStudent = false;
+		} else {
 			addStudentPanel = new AddStudentPanel(student);
+			updateStudent = true;
 		}
 		add(addStudentPanel, BorderLayout.CENTER);
 
@@ -61,7 +64,15 @@ public class AddStudentDialog extends JDialog {
 				boolean flag = true;
 				Student student = addStudentPanel.getData();
 				try {
-					controller.addStudent(student);
+					if (updateStudent) {
+						String query = "Delete  from Students where StudentId = " + "'" + student.getId() + "'";
+						controller.deleteStudent(query);
+						controller.addStudent(student);
+					}
+
+					else {
+						controller.addStudent(student);
+					}
 				} catch (Exception SQLIntegrityConstraintViolationException) {
 					// TODO Auto-generated catch block
 					SQLIntegrityConstraintViolationException.printStackTrace();

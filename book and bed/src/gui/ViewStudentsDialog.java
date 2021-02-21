@@ -16,7 +16,7 @@ public class ViewStudentsDialog extends JDialog {
 	public ViewStudentsDialog(JFrame parent) {
 		super(parent, "Students", true);
 
-		setSize(new Dimension(800, 800));
+		setSize(new Dimension(1366, 800));
 		setLayout(new BorderLayout());
 
 		studentsTable = new StudentsTable();
@@ -26,6 +26,7 @@ public class ViewStudentsDialog extends JDialog {
 
 	public void setData() {
 		studentsTable.setData(controller.getStudents(null));
+		studentsTable.refresh();
 		setVisible(true);
 	}
 

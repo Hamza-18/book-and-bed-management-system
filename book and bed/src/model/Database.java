@@ -214,7 +214,6 @@ public class Database {
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);
 		while (checkResult.next()) {
-			System.out.println("here");
 			String id = checkResult.getLong("StudentId") + "";
 			String studentName = checkResult.getString("StudentName");
 			String fatherName = checkResult.getString("FatherName");

@@ -72,6 +72,8 @@ public class AddStudentPanel extends JPanel {
 	private JTextField department;
 	private JComboBox resident;
 
+	private UtilDateModel model;
+
 	private boolean updateStudent;
 
 	public AddStudentPanel() {
@@ -82,7 +84,44 @@ public class AddStudentPanel extends JPanel {
 	public AddStudentPanel(Student student) {
 		updateStudent = true;
 		createPanel();
-		System.out.println(student.getName());
+		studentId.setText(student.getId());
+		studentName.setText(student.getName());
+		fatherName.setText(student.getFatherName());
+
+		if (student.getGender().equals("Male")) {
+			maleRadioBtn.setSelected(true);
+		} else {
+			femaleRadioBtn.setSelected(true);
+		}
+
+		studentNumber.setText(student.getStudentNumber());
+		guardianNumber.setText(student.getGuardianNumber());
+		studentEmail.setText(student.getStudentEmail());
+		studentBlood.setText(student.getBloodGroup());
+		address.setText(student.getAddress());
+		city.setText(student.getCity());
+
+		if (student.getEmployment().equals("Employed")) {
+			employmentType.setSelectedIndex(0);
+		} else {
+			employmentType.setSelectedIndex(1);
+		}
+
+		university.setText(student.getUniversity());
+		semester.setText(student.getSemester());
+		department.setText(student.getDepartment());
+		java.util.Date date = student.getAdmissionDate();
+		model.setValue(date);
+		rent.setText(student.getRent());
+		securityFee.setText(student.getSecurityFee());
+		roomNumber.setText(student.getRoomNumber());
+
+		if (student.getResident().equals("Yes")) {
+			resident.setSelectedIndex(0);
+		} else {
+			resident.setSelectedIndex(1);
+		}
+
 	}
 
 	public void createPanel() {
@@ -414,7 +453,8 @@ public class AddStudentPanel extends JPanel {
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 
-		UtilDateModel model = new UtilDateModel();
+		model = new UtilDateModel();
+		model.setSelected(true);
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		admissionDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
@@ -496,8 +536,8 @@ public class AddStudentPanel extends JPanel {
 
 			resident = new JComboBox();
 			DefaultComboBoxModel residentModel = new DefaultComboBoxModel();
-			comboModel.addElement("Yes");
-			comboModel.addElement("No");
+			residentModel.addElement("Yes");
+			residentModel.addElement("No");
 			resident.setModel(residentModel);
 			resident.setFont(new Font("Dialog", Font.PLAIN, 14));
 			resident.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
