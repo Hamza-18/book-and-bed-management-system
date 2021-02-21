@@ -143,7 +143,11 @@ public class Database {
 			Insertstmt.setString(16, student.getRent());
 			Insertstmt.setString(17, student.getSecurityFee());
 			Insertstmt.setString(18, student.getRoomNumber());
-			Insertstmt.setString(19, "Yes");
+			if (student.getResident() != null) {
+				Insertstmt.setString(19, student.getResident());
+			} else {
+				Insertstmt.setString(19, "Yes");
+			}
 
 			Insertstmt.execute();
 		}
@@ -167,7 +171,11 @@ public class Database {
 			Insertstmt.setString(15, student.getRent());
 			Insertstmt.setString(16, student.getSecurityFee());
 			Insertstmt.setString(17, student.getRoomNumber());
-			Insertstmt.setString(18, "Yes");
+			if (student.getResident() != null) {
+				Insertstmt.setString(19, student.getResident());
+			} else {
+				Insertstmt.setString(19, "Yes");
+			}
 
 			Insertstmt.execute();
 
@@ -210,6 +218,7 @@ public class Database {
 		else {
 			getDb = "select * from Students";
 			getDb += query;
+			System.out.println(getDb);
 		}
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);

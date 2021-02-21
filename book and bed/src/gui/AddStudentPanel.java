@@ -564,7 +564,7 @@ public class AddStudentPanel extends JPanel {
 		String bloodGroup = this.studentBlood.getText();
 		String studentAddresss = this.address.getText();
 		String studentCity = this.city.getText();
-		String employement = (String) employmentType.getSelectedItem();
+		String employment = (String) employmentType.getSelectedItem();
 		String studentUniversity = this.university.getText();
 		String studentSemester = this.semester.getText();
 		String studentDepartment = this.department.getText();
@@ -572,14 +572,23 @@ public class AddStudentPanel extends JPanel {
 		String studentRent = this.rent.getText();
 		String studentSecurityFee = this.securityFee.getText();
 		String room = this.roomNumber.getText();
-		if (id.equals("")) {
-			student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
-					studentAddresss, studentCity, employement, studentUniversity, studentSemester, studentDepartment,
-					studentAdmissionDate, studentRent, studentSecurityFee, room);
+		if (!updateStudent) {
+			if (id.equals("")) {
+				student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+						studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
+						studentAdmissionDate, studentRent, studentSecurityFee, room);
+			} else {
+				student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+						studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
+						studentAdmissionDate, studentRent, studentSecurityFee, room);
+			}
 		} else {
+			String resident = (String) this.resident.getSelectedItem();
+			System.out.println(resident);
 			student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
-					studentAddresss, studentCity, employement, studentUniversity, studentSemester, studentDepartment,
-					studentAdmissionDate, studentRent, studentSecurityFee, room);
+					studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
+					studentAdmissionDate, studentRent, studentSecurityFee, room, resident);
+
 		}
 		return student;
 	}
