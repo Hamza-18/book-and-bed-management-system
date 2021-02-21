@@ -119,7 +119,8 @@ public class Database {
 		Statement stmt = connection.createStatement();
 		String addData = "insert into Students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String addDataTwo = "insert into Students(StudentName,FatherName,Gender,StudentNumber, GuardianNumber"
-				+ ", Email, BloodGroup, Address, City,Employment,University,Semester,Department,AdmissionDate,Rent,SecurityFee,RoomNumber,Resident) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ ", Email, BloodGroup, Address, City,Employment,University,Semester,Department,AdmissionDate,"
+				+ "Rent,SecurityFee,RoomNumber,Resident) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement Insertstmt = connection.prepareStatement(addData);
 		if (student.getId() != null) {
@@ -213,6 +214,7 @@ public class Database {
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);
 		while (checkResult.next()) {
+			System.out.println("here");
 			String id = checkResult.getLong("StudentId") + "";
 			String studentName = checkResult.getString("StudentName");
 			String fatherName = checkResult.getString("FatherName");

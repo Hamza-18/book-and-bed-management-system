@@ -47,6 +47,7 @@ public class AddStudentPanel extends JPanel {
 	private JLabel lblNewLabel_13;
 	private JLabel lblNewLabel_14;
 	private JLabel lblNewLabel_15;
+	private JLabel residentLabel;
 
 	private JRadioButton maleRadioBtn;
 	private JRadioButton femaleRadioBtn;
@@ -69,14 +70,24 @@ public class AddStudentPanel extends JPanel {
 	private JTextField securityFee;
 	private JTextField roomNumber;
 	private JTextField department;
+	private JComboBox resident;
+
+	private boolean updateStudent;
 
 	public AddStudentPanel() {
-		setLayout(new BorderLayout());
-		setBackground(new Color(255, 255, 255));
+		updateStudent = false;
 		createPanel();
 	}
 
+	public AddStudentPanel(Student student) {
+		updateStudent = true;
+		createPanel();
+		System.out.println(student.getName());
+	}
+
 	public void createPanel() {
+		setLayout(new BorderLayout());
+		setBackground(new Color(255, 255, 255));
 
 		panel = new JPanel();
 		add(new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER),
@@ -473,6 +484,29 @@ public class AddStudentPanel extends JPanel {
 		gbc_roomNumber.gridy = 9;
 		panel.add(roomNumber, gbc_roomNumber);
 
+		if (updateStudent) {
+			residentLabel = new JLabel("Resident:");
+			residentLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+			GridBagConstraints gbc_residentLabel = new GridBagConstraints();
+			gbc_residentLabel.anchor = GridBagConstraints.EAST;
+			gbc_residentLabel.insets = new Insets(0, 10, 0, 5);
+			gbc_residentLabel.gridx = 0;
+			gbc_residentLabel.gridy = 10;
+			panel.add(residentLabel, gbc_residentLabel);
+
+			resident = new JComboBox();
+			DefaultComboBoxModel residentModel = new DefaultComboBoxModel();
+			comboModel.addElement("Yes");
+			comboModel.addElement("No");
+			resident.setModel(residentModel);
+			resident.setFont(new Font("Dialog", Font.PLAIN, 14));
+			resident.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+			GridBagConstraints gbc_resident = new GridBagConstraints();
+			gbc_resident.anchor = GridBagConstraints.WEST;
+			gbc_resident.gridx = 1;
+			gbc_resident.gridy = 10;
+			panel.add(resident, gbc_resident);
+		}
 		setVisible(true);
 
 	}

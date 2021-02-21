@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,12 +17,45 @@ public class SearchPanel extends JPanel {
 	private JTextField studentName;
 	private JTextField studentId;
 	private JTextField roomNumber;
+	private SearchStudentInterface searchStudentInterface;
+	private JButton searchBtn;
 
 	public SearchPanel() {
 		setComponents();
+
+		searchBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				String query;
+				String name = " ";
+				long id = -1;
+				String room = " ";
+
+				if (!studentName.getText().equals(""))
+					name = studentName.getText();
+
+				if (!studentId.getText().equals(""))
+					id = Long.parseLong(studentId.getText());
+
+				if (!roomNumber.getText().equals(""))
+					room = roomNumber.getText();
+
+				query = " where StudentId like " + "'" + id + "'" + " or StudentName like " + "'" + name + "'"
+						+ " or RoomNumber like " + "'" + room + "'";
+				if (searchStudentInterface != null)
+					searchStudentInterface.getQuery(query);
+
+			}
+		});
+	}
+
+	public void setInterface(SearchStudentInterface searchStudentInterface) {
+		this.searchStudentInterface = searchStudentInterface;
 	}
 
 	public void setComponents() {
+
 		GridBagLayout gridBagLayout = new GridBagLayout();
 		gridBagLayout.columnWidths = new int[] { 78, 0, 0, 0, 0 };
 		gridBagLayout.rowHeights = new int[] { 64, 38, 54, 0 };
@@ -83,7 +118,7 @@ public class SearchPanel extends JPanel {
 		gbc_textField_4.gridy = 1;
 		add(roomNumber, gbc_textField_4);
 
-		JButton searchBtn = new JButton("Search");
+		searchBtn = new JButton("Search");
 		searchBtn.setFont(new Font("Dialog", Font.BOLD, 15));
 		GridBagConstraints gbc_btnSearch = new GridBagConstraints();
 		gbc_btnSearch.gridx = 3;

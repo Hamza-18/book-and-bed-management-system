@@ -21,10 +21,14 @@ public class AddStudentDialog extends JDialog {
 	private JButton cancelButton;
 	private Controller controller;
 
-	public AddStudentDialog() {
+	public AddStudentDialog(Student student) {
 		setLayout(new BorderLayout());
 		setMinimumSize(new Dimension(730, 600));
-		addStudentPanel = new AddStudentPanel();
+		if (student == null)
+			addStudentPanel = new AddStudentPanel();
+		else {
+			addStudentPanel = new AddStudentPanel(student);
+		}
 		add(addStudentPanel, BorderLayout.CENTER);
 
 		controller = new Controller();

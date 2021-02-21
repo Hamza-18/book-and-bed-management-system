@@ -51,7 +51,7 @@ public class StudentPanel extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		setComponents();
 		setColor(null);
-		addStudentDialog = new AddStudentDialog();
+		addStudentDialog = new AddStudentDialog(null);
 		updateStudentDialog = new UpdateStudentDialog();
 		deleteStudentDialog = new DeleteStudentDialog();
 		viewStudentsDialog = new ViewStudentsDialog(null);

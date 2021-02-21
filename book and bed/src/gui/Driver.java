@@ -14,7 +14,7 @@ public class Driver {
 		loginFrame.setContentPane(loginPanel);
 		loginFrame.setVisible(true);
 		loginFrame.setSize(new Dimension(798, 492));
-		loginFrame.setResizable(false);
+//		loginFrame.setResizable(false);
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginPanel.loginListener(new LoginInterface() {
 
