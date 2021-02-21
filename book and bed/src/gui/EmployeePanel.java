@@ -56,7 +56,7 @@ public class EmployeePanel extends JPanel {
 		setComponents();
 		setColor(null);
 
-		addEmployeeDialog = new AddEmployeeDialog();
+		addEmployeeDialog = new AddEmployeeDialog(null);
 		updateEmployeeDialog = new UpdateEmployeeDialog();
 		deleteEmployeeDialog = new DeleteEmployeeDialog();
 		addPaymentsDialog = new AddPaymentsDialog();

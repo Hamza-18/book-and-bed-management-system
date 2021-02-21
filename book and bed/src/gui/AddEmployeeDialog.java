@@ -23,14 +23,20 @@ public class AddEmployeeDialog extends JDialog {
 	private JButton cancelButton;
 	private Controller controller;
 	private Preferences dataPreferences;
+	private boolean updateEmployee;
 
-	public AddEmployeeDialog() {
+	public AddEmployeeDialog(Employee employee) {
 		setBackground(Color.WHITE);
 		setSize(new Dimension(600, 333));
+		setLocationRelativeTo(null);
 
 		controller = new Controller();
-
-		addEmployeePanel = new AddEmployeePanel();
+		if (employee == null) {
+			addEmployeePanel = new AddEmployeePanel();
+		} else {
+			addEmployeePanel = new AddEmployeePanel(employee);
+			updateEmployee = true;
+		}
 		getContentPane().add(addEmployeePanel, BorderLayout.CENTER);
 
 		buttonPanel = new JPanel();
@@ -63,7 +69,14 @@ public class AddEmployeeDialog extends JDialog {
 				Employee employee = addEmployeePanel.getData();
 
 				try {
-					controller.addEmployee(employee);
+					if (updateEmployee) {
+						String query = "delete from Employees where EmployeeId = " + "'"
+								+ Long.parseLong(employee.getId()) + "'";
+						controller.deleteEmployee(query);
+						controller.addEmployee(employee);
+					} else {
+						controller.addEmployee(employee);
+					}
 				} catch (Exception SQLIntegrityConstraintViolationException) {
 					// TODO Auto-generated catch block
 					flag = false;

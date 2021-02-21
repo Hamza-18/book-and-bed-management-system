@@ -29,15 +29,47 @@ public class AddEmployeePanel extends JPanel {
 	private JTextField employeeWork;
 
 	private ButtonGroup gender;
+	private JRadioButton maleRadio;
+	private JRadioButton femaleRadio;
+
 	private JTextField employeeSalary;
 	private JTextField textField;
 
 	private JDatePickerImpl employeeDate;
 	private JTextField employeeId;
+	private UtilDateModel model;
 
 	public AddEmployeePanel() {
 		setBackground(Color.WHITE);
 		setComponents();
+	}
+
+	public AddEmployeePanel(Employee employee) {
+		setBackground(Color.WHITE);
+		setComponents();
+
+		employeeId.setText(employee.getId());
+		employeeName.setText(employee.getName());
+		number.setText(employee.getNumber());
+
+		if (employee.getDuration().equals("Permanent")) {
+			employeeDuration.setSelectedIndex(0);
+		} else {
+			employeeDuration.setSelectedIndex(1);
+		}
+
+		employeeWork.setText(employee.getWorkType());
+
+		if (employee.getGender().equals("Male")) {
+			maleRadio.setSelected(true);
+		} else {
+			femaleRadio.setSelected(true);
+		}
+
+		java.util.Date date = employee.getDate();
+		model.setValue(date);
+		employeeSalary.setText(employee.getSalary());
+
 	}
 
 	public void setComponents() {
@@ -112,7 +144,7 @@ public class AddEmployeePanel extends JPanel {
 		gbc_lblGender.gridy = 1;
 		add(lblGender, gbc_lblGender);
 
-		JRadioButton maleRadio = new JRadioButton("Male");
+		maleRadio = new JRadioButton("Male");
 		GridBagConstraints gbc_maleRadio = new GridBagConstraints();
 		gbc_maleRadio.anchor = GridBagConstraints.WEST;
 		gbc_maleRadio.insets = new Insets(0, 0, 5, 0);
@@ -120,7 +152,7 @@ public class AddEmployeePanel extends JPanel {
 		gbc_maleRadio.gridy = 1;
 		add(maleRadio, gbc_maleRadio);
 
-		JRadioButton femaleRadio = new JRadioButton("Female");
+		femaleRadio = new JRadioButton("Female");
 		GridBagConstraints gbc_femaleRadio = new GridBagConstraints();
 		gbc_femaleRadio.insets = new Insets(0, 0, 5, 0);
 		gbc_femaleRadio.anchor = GridBagConstraints.WEST;
@@ -208,7 +240,7 @@ public class AddEmployeePanel extends JPanel {
 		p.put("text.month", "Month");
 		p.put("text.year", "Year");
 
-		UtilDateModel model = new UtilDateModel();
+		model = new UtilDateModel();
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		employeeDate = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 
