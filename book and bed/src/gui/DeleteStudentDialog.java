@@ -31,6 +31,7 @@ public class DeleteStudentDialog extends JDialog {
 		setBackground(Color.white);
 		setLayout(new BorderLayout());
 		setMinimumSize(new Dimension(700, 700));
+		setLocationRelativeTo(null);
 
 		searchPanel = new SearchPanel();
 		add(searchPanel, BorderLayout.NORTH);

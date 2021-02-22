@@ -18,6 +18,7 @@ public class ViewMonthlyExpenseDialog extends JDialog {
 		setSize(new Dimension(800, 800));
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 
 		kitchenTable = new KitchenTable(table);
 		controller = new Controller();

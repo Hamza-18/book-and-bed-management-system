@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -176,6 +178,24 @@ public class KitchenPanel extends JPanel {
 				// TODO Auto-generated method stub
 
 			}
+		});
+
+		componenetsPanel.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				System.out.println(e.getComponent().getSize().width);
+				if (e.getComponent().getSize().width > 820) {
+					monthlyExpense.setBounds(30, 201, 329, 61);
+					viewDailyExpense.setBounds(600, 69, 294, 67);
+					viewMonthPanel.setBounds(30, 69, 329, 67);
+					dailyExpense.setBounds(600, 201, 294, 61);
+				} else if (e.getComponent().getSize().width < 820) {
+					monthlyExpense.setBounds(12, 201, 329, 61);
+					viewDailyExpense.setBounds(376, 69, 294, 67);
+					viewMonthPanel.setBounds(12, 69, 329, 67);
+					dailyExpense.setBounds(376, 201, 294, 61);
+				}
+			}
+
 		});
 	}
 

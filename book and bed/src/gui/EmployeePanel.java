@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -267,6 +269,28 @@ public class EmployeePanel extends JPanel {
 			}
 		});
 
+		componentsPanel.addComponentListener(new ComponentAdapter() {
+			public void componentResized(ComponentEvent e) {
+				if (e.getComponent().getSize().width > 820) {
+					addEmployeePanel.setBounds(600, 63, 312, 65);
+					updateEmployeePanel.setBounds(30, 179, 301, 65);
+					viewEmployeePanel.setBounds(30, 63, 301, 65);
+					deleteEmployeePanel.setBounds(600, 179, 312, 65);
+					viewPayments.setBounds(600, 303, 312, 65);
+					addPayment.setBounds(30, 303, 296, 65);
+
+				} else if (e.getComponent().getSize().width < 820) {
+					viewEmployeePanel.setBounds(12, 63, 301, 65);
+					addEmployeePanel.setBounds(390, 63, 312, 65);
+					updateEmployeePanel.setBounds(12, 179, 301, 65);
+					deleteEmployeePanel.setBounds(390, 179, 312, 65);
+					viewPayments.setBounds(390, 303, 312, 65);
+					addPayment.setBounds(12, 303, 296, 65);
+
+				}
+			}
+
+		});
 	}
 
 	public void setComponents() {
@@ -295,7 +319,7 @@ public class EmployeePanel extends JPanel {
 		viewEmployeePanel.add(lblViewEmployee);
 
 		addEmployeePanel = new JPanel();
-		addEmployeePanel.setBounds(390, 63, 296, 65);
+		addEmployeePanel.setBounds(390, 63, 312, 65);
 		componentsPanel.add(addEmployeePanel);
 
 		lblAddEmployee = new JLabel("Add Employee");
@@ -311,7 +335,7 @@ public class EmployeePanel extends JPanel {
 		updateEmployeePanel.add(lblUpdateEmployee);
 
 		deleteEmployeePanel = new JPanel();
-		deleteEmployeePanel.setBounds(390, 179, 296, 65);
+		deleteEmployeePanel.setBounds(390, 179, 312, 65);
 		componentsPanel.add(deleteEmployeePanel);
 
 		lblDeleteEmployee = new JLabel("Delete Employee ");
@@ -335,7 +359,7 @@ public class EmployeePanel extends JPanel {
 		lblViewEmployee.setIcon(new ImageIcon(viewEmployeeIcon));
 
 		addPayment = new JPanel();
-		addPayment.setBounds(17, 303, 296, 65);
+		addPayment.setBounds(12, 303, 296, 65);
 		componentsPanel.add(addPayment);
 
 		JLabel lblAddPayment = new JLabel("Add Payment");
@@ -343,7 +367,7 @@ public class EmployeePanel extends JPanel {
 		addPayment.add(lblAddPayment);
 
 		viewPayments = new JPanel();
-		viewPayments.setBounds(390, 303, 296, 65);
+		viewPayments.setBounds(390, 303, 312, 65);
 		componentsPanel.add(viewPayments);
 
 		JLabel lblViewPayments = new JLabel("View Payments");

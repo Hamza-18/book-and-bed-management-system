@@ -31,6 +31,7 @@ public class ViewStudentsDialog extends JDialog {
 
 		setSize(new Dimension(1366, 800));
 		setLayout(new BorderLayout());
+		setLocationRelativeTo(null);
 
 		studentsTable = new StudentsTable();
 		controller = new Controller();

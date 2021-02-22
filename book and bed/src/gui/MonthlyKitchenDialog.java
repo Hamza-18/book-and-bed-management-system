@@ -24,6 +24,7 @@ public class MonthlyKitchenDialog extends JDialog {
 		setMinimumSize(new Dimension(600, 320));
 		setSize(600, 300);
 		getContentPane().setLayout(new BorderLayout());
+		setLocationRelativeTo(null);
 
 		controller = new Controller();
 

@@ -4,9 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import model.Controller;
 
 public class HomePanel extends JPanel {
 	private JPanel titlePanel;
@@ -29,12 +32,17 @@ public class HomePanel extends JPanel {
 	private static int BASIC_GREEN = 176;
 	private static int BASIC_BLUE = 152;
 
+	private Controller controller;
+
 	public HomePanel() {
 		setBackground(new Color(255, 255, 255));
 		setLayout(new BorderLayout());
 
 		setComponents();
 		setColor();
+
+		controller = new Controller();
+		setCount();
 	}
 
 	public void setComponents() {
@@ -111,6 +119,19 @@ public class HomePanel extends JPanel {
 		for (JPanel jPanel : panels) {
 			jPanel.setBackground(new Color(BASIC_RED, BASIC_GREEN, BASIC_BLUE));
 			jPanel.setBorder(null);
+		}
+	}
+
+	public void setCount() {
+		try {
+			students.setText(controller.getStudentCount());
+			maleStudents.setText(controller.getMaleStudentCount());
+			femaleStudents.setText(controller.getFemaleCount());
+			employees.setText(controller.getEmployeeCount());
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
 	}

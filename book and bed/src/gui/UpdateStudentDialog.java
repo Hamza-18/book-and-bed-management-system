@@ -30,6 +30,7 @@ public class UpdateStudentDialog extends JDialog {
 	public UpdateStudentDialog() {
 		getContentPane().setLayout(new BorderLayout());
 		setSize(new Dimension(700, 700));
+		setLocationRelativeTo(null);
 
 		controller = new Controller();
 

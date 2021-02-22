@@ -172,9 +172,9 @@ public class Database {
 			Insertstmt.setString(16, student.getSecurityFee());
 			Insertstmt.setString(17, student.getRoomNumber());
 			if (student.getResident() != null) {
-				Insertstmt.setString(19, student.getResident());
+				Insertstmt.setString(18, student.getResident());
 			} else {
-				Insertstmt.setString(19, "Yes");
+				Insertstmt.setString(18, "Yes");
 			}
 
 			Insertstmt.execute();
@@ -315,6 +315,62 @@ public class Database {
 		deleteStmt.execute();
 		stmt.close();
 
+	}
+
+	public int getStudentCount() throws SQLException {
+		int count = 0;
+		String query = "select Count(*) from Students where Resident = 'Yes' ";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		if (checkResult.next())
+			count = checkResult.getInt(1);
+		return count;
+	}
+
+	public int getMaleStudentCount() throws SQLException {
+		int count = 0;
+		String query = "select Count(*) from Students where Resident = 'Yes' and Gender = 'Male'";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		if (checkResult.next())
+			count = checkResult.getInt(1);
+		return count;
+	}
+
+	public int getFemaleStudentCount() throws SQLException {
+		int count = 0;
+		String query = "select Count(*) from Students where Resident = 'Yes' and Gender = 'Female'";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		if (checkResult.next())
+			count = checkResult.getInt(1);
+		return count;
+	}
+
+	public int getEmployeeCount() throws SQLException {
+		int count = 0;
+		String query = "select Count(*) from Employees";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		if (checkResult.next())
+			count = checkResult.getInt(1);
+		return count;
+	}
+
+	public ArrayList<String> getMaleRooms() throws SQLException {
+		ArrayList<String> rooms = new ArrayList<>();
+
+		String query = "Select RoomNumber from Students where Resident = 'Yes'";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		while (checkResult.next()) {
+
+			String room = checkResult.getString("RoomNumber");
+
+			rooms.add(room);
+		}
+
+		return rooms;
 	}
 
 }

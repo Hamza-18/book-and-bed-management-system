@@ -26,6 +26,7 @@ public class AddPaymentsDialog extends JDialog {
 	public AddPaymentsDialog() {
 		setLayout(new BorderLayout());
 		setSize(new Dimension(550, 320));
+		setLocationRelativeTo(null);
 
 		controller = new Controller();
 

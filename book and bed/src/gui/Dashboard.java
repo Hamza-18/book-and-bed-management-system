@@ -27,6 +27,7 @@ public class Dashboard extends JFrame {
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setMinimumSize(new Dimension(950, 600));
+		setLocationRelativeTo(null);
 
 		try {
 			Controller.setConnection();
@@ -83,6 +84,7 @@ public class Dashboard extends JFrame {
 				contentPane.remove(panelToRemove);
 				contentPane.add(homePanel, BorderLayout.CENTER);
 				contentPane.repaint();
+				homePanel.setCount();
 				panelToRemove = homePanel;
 			}
 		} else if (panel.equals("employeePanel")) {

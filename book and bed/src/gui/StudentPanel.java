@@ -51,6 +51,7 @@ public class StudentPanel extends JPanel {
 		setBackground(new Color(255, 255, 255));
 		setComponents();
 		setColor(null);
+
 		addStudentDialog = new AddStudentDialog(null);
 		updateStudentDialog = new UpdateStudentDialog();
 		deleteStudentDialog = new DeleteStudentDialog();
@@ -195,24 +196,25 @@ public class StudentPanel extends JPanel {
 		componentsPanel.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				System.out.println(e.getComponent().getSize().width);
-				if (e.getComponent().getSize().width != 719) {
+				if (e.getComponent().getSize().width > 820) {
 					addStudentPanel.setBounds(600, 55, 296, 65);
 					deleteStudentPanel.setBounds(600, 160, 296, 65);
 					viewStudentPanel.setBounds(30, 55, 301, 65);
 					updateStudentPanel.setBounds(30, 160, 301, 65);
+				} else if (e.getComponent().getSize().width < 820) {
+					addStudentPanel.setBounds(385, 55, 296, 65);
+					deleteStudentPanel.setBounds(385, 160, 296, 65);
+					viewStudentPanel.setBounds(12, 55, 301, 65);
+					updateStudentPanel.setBounds(12, 160, 301, 65);
 				}
 			}
 
-			@Override
-			public void componentMoved(ComponentEvent e) {
-				System.out.println("Moved to " + e.getComponent().getLocation());
-			}
 		});
 
 	}
 
 	public void setComponents() {
+
 		titlePanel = new JPanel();
 		titlePanel.setBackground(new Color(227, 187, 58));
 		titlePanel.setLayout(new FlowLayout(FlowLayout.LEFT));

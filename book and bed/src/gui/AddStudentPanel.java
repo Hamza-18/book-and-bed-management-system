@@ -7,13 +7,17 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
@@ -26,7 +30,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import model.Student;
 
-public class AddStudentPanel extends JPanel {
+public class AddStudentPanel extends JPanel implements ItemListener {
 
 	private JPanel panel;
 
@@ -71,14 +75,19 @@ public class AddStudentPanel extends JPanel {
 	private JTextField roomNumber;
 	private JTextField department;
 	private JComboBox resident;
+	private JComboBox roomNumberBox;
 
 	private UtilDateModel model;
 
 	private boolean updateStudent;
 
+	private ArrayList<String> maleRooms = new ArrayList<>();
+	private ArrayList<String> femaleRooms = new ArrayList<>();
+
 	public AddStudentPanel() {
 		updateStudent = false;
 		createPanel();
+
 	}
 
 	public AddStudentPanel(Student student) {
@@ -114,7 +123,14 @@ public class AddStudentPanel extends JPanel {
 		model.setValue(date);
 		rent.setText(student.getRent());
 		securityFee.setText(student.getSecurityFee());
-		roomNumber.setText(student.getRoomNumber());
+		String room = student.getRoomNumber();
+		if (maleRadioBtn.isSelected()) {
+
+			roomNumberBox.setSelectedIndex(maleRooms.indexOf(room));
+		} else {
+			roomNumberBox.setSelectedIndex(femaleRooms.indexOf(room));
+		}
+		// roomNumber.setText(student.getRoomNumber());
 
 		if (student.getResident().equals("Yes")) {
 			resident.setSelectedIndex(0);
@@ -125,8 +141,12 @@ public class AddStudentPanel extends JPanel {
 	}
 
 	public void createPanel() {
+
 		setLayout(new BorderLayout());
 		setBackground(new Color(255, 255, 255));
+
+		setMaleRooms();
+		setFemalRooms();
 
 		panel = new JPanel();
 		add(new JScrollPane(panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER),
@@ -235,6 +255,9 @@ public class AddStudentPanel extends JPanel {
 		gender = new ButtonGroup();
 		gender.add(maleRadioBtn);
 		gender.add(femaleRadioBtn);
+
+		maleRadioBtn.addItemListener(this);
+		femaleRadioBtn.addItemListener(this);
 
 		lblNewLabel_2 = new JLabel(" Number:");
 		lblNewLabel_2.setFont(new Font("Dialog", Font.PLAIN, 18));
@@ -514,15 +537,23 @@ public class AddStudentPanel extends JPanel {
 		gbc_lblNewLabel_14.gridy = 9;
 		panel.add(lblNewLabel_14, gbc_lblNewLabel_14);
 
-		roomNumber = new JTextField();
-		roomNumber.setFont(new Font("Dialog", Font.PLAIN, 14));
-		roomNumber.setColumns(10);
-		roomNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+		roomNumberBox = new JComboBox();
+		roomNumberBox.setModel(new DefaultComboBoxModel<String>(maleRooms.toArray(new String[0])));
 		GridBagConstraints gbc_roomNumber = new GridBagConstraints();
 		gbc_roomNumber.anchor = GridBagConstraints.WEST;
 		gbc_roomNumber.gridx = 3;
 		gbc_roomNumber.gridy = 9;
-		panel.add(roomNumber, gbc_roomNumber);
+		panel.add(roomNumberBox, gbc_roomNumber);
+
+//		roomNumber = new JTextField();
+//		roomNumber.setFont(new Font("Dialog", Font.PLAIN, 14));
+//		roomNumber.setColumns(10);
+//		roomNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
+//		GridBagConstraints gbc_roomNumber = new GridBagConstraints();
+//		gbc_roomNumber.anchor = GridBagConstraints.WEST;
+//		gbc_roomNumber.gridx = 3;
+//		gbc_roomNumber.gridy = 9;
+//		panel.add(roomNumber, gbc_roomNumber);
 
 		if (updateStudent) {
 			residentLabel = new JLabel("Resident:");
@@ -552,48 +583,56 @@ public class AddStudentPanel extends JPanel {
 	}
 
 	public Student getData() {
-		Student student;
 
-		String id = studentId.getText();
-		String name = studentName.getText();
-		String father = this.fatherName.getText();
-		String studentGender = gender.getSelection().getActionCommand();
-		String studentPhone = this.studentNumber.getText();
-		String guardianPhone = this.guardianNumber.getText();
-		String email = this.studentEmail.getText();
-		String bloodGroup = this.studentBlood.getText();
-		String studentAddresss = this.address.getText();
-		String studentCity = this.city.getText();
-		String employment = (String) employmentType.getSelectedItem();
-		String studentUniversity = this.university.getText();
-		String studentSemester = this.semester.getText();
-		String studentDepartment = this.department.getText();
-		Date studentAdmissionDate = getDate();
-		String studentRent = this.rent.getText();
-		String studentSecurityFee = this.securityFee.getText();
-		String room = this.roomNumber.getText();
-		if (!updateStudent) {
-			if (id.equals("")) {
-				student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
-						studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
-						studentAdmissionDate, studentRent, studentSecurityFee, room);
+		if (!studentName.getText().equals("")) {
+			Student student;
+
+			String id = studentId.getText();
+			String name = studentName.getText();
+			String father = this.fatherName.getText();
+			String studentGender = gender.getSelection().getActionCommand();
+			String studentPhone = this.studentNumber.getText();
+			String guardianPhone = this.guardianNumber.getText();
+			String email = this.studentEmail.getText();
+			String bloodGroup = this.studentBlood.getText();
+			String studentAddresss = this.address.getText();
+			String studentCity = this.city.getText();
+			String employment = (String) employmentType.getSelectedItem();
+			String studentUniversity = this.university.getText();
+			String studentSemester = this.semester.getText();
+			String studentDepartment = this.department.getText();
+			Date studentAdmissionDate = getDate();
+			String studentRent = this.rent.getText();
+			String studentSecurityFee = this.securityFee.getText();
+			String room = (String) roomNumberBox.getSelectedItem();
+			if (!updateStudent) {
+				if (id.equals("")) {
+					student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
+							studentAddresss, studentCity, employment, studentUniversity, studentSemester,
+							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room);
+				} else {
+					student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email,
+							bloodGroup, studentAddresss, studentCity, employment, studentUniversity, studentSemester,
+							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room);
+				}
 			} else {
+				String resident = (String) this.resident.getSelectedItem();
+				System.out.println(resident);
 				student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
 						studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
-						studentAdmissionDate, studentRent, studentSecurityFee, room);
-			}
-		} else {
-			String resident = (String) this.resident.getSelectedItem();
-			System.out.println(resident);
-			student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
-					studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
-					studentAdmissionDate, studentRent, studentSecurityFee, room, resident);
+						studentAdmissionDate, studentRent, studentSecurityFee, room, resident);
 
+			}
+			return student;
+
+		} else {
+			JOptionPane.showMessageDialog(null, "Please fill out required information");
 		}
-		return student;
+		return null;
 	}
 
 	public Date getDate() {
+
 		String month = (admissionDate.getModel().getMonth() + 1) + "";
 		String day = admissionDate.getModel().getDay() + "";
 		String year = admissionDate.getModel().getYear() + "";
@@ -624,6 +663,147 @@ public class AddStudentPanel extends JPanel {
 		securityFee.setText("");
 		roomNumber.setText("");
 		department.setText("");
+
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+
+		if (e.getSource() == femaleRadioBtn) {
+			if (femaleRadioBtn.isSelected())
+				roomNumberBox.setModel(new DefaultComboBoxModel<String>(femaleRooms.toArray(new String[0])));
+
+		} else if (e.getSource() == maleRadioBtn) {
+			if (maleRadioBtn.isSelected())
+				roomNumberBox.setModel(new DefaultComboBoxModel<String>(maleRooms.toArray(new String[0])));
+		}
+	}
+
+	public void setMaleRooms() {
+		maleRooms.add("1-1");
+		maleRooms.add("1-2");
+		maleRooms.add("2-1");
+		maleRooms.add("2-2");
+		maleRooms.add("3-1");
+		maleRooms.add("3-2");
+		maleRooms.add("4-1");
+		maleRooms.add("4-2");
+		maleRooms.add("5-1");
+		maleRooms.add("5-2");
+		maleRooms.add("6-1");
+		maleRooms.add("6-2");
+		maleRooms.add("7-1");
+		maleRooms.add("7-2");
+		maleRooms.add("8-1");
+		maleRooms.add("8-2");
+		maleRooms.add("9-1");
+		maleRooms.add("9-2");
+		maleRooms.add("10-1");
+		maleRooms.add("10-2");
+		maleRooms.add("11-1");
+		maleRooms.add("11-2");
+		maleRooms.add("12-1");
+		maleRooms.add("12-2");
+		maleRooms.add("13-1");
+		maleRooms.add("13-2");
+		maleRooms.add("14-1");
+		maleRooms.add("14-2");
+		maleRooms.add("15-1");
+		maleRooms.add("15-2");
+		maleRooms.add("101-1");
+		maleRooms.add("101-2");
+		maleRooms.add("102-1");
+		maleRooms.add("102-2");
+		maleRooms.add("103-1");
+		maleRooms.add("103-2");
+		maleRooms.add("104-1");
+		maleRooms.add("104-2");
+		maleRooms.add("105-1");
+		maleRooms.add("105-2");
+		maleRooms.add("106-1");
+		maleRooms.add("106-2");
+		maleRooms.add("107-1");
+		maleRooms.add("107-2");
+		maleRooms.add("108-2");
+		maleRooms.add("108-2");
+		maleRooms.add("109-1");
+		maleRooms.add("109-2");
+		maleRooms.add("110-1");
+		maleRooms.add("110-2");
+		maleRooms.add("111-1");
+		maleRooms.add("112-1");
+		maleRooms.add("112-2");
+		maleRooms.add("113-1");
+		maleRooms.add("113-2");
+		maleRooms.add("201-1");
+		maleRooms.add("201-2");
+		maleRooms.add("202-1");
+		maleRooms.add("203-1");
+		maleRooms.add("203-2");
+		maleRooms.add("204-1");
+		maleRooms.add("205-1");
+		maleRooms.add("205-2");
+		maleRooms.add("206-1");
+		maleRooms.add("206-2");
+		maleRooms.add("207-1");
+		maleRooms.add("207-2");
+		maleRooms.add("208-1");
+		maleRooms.add("208-2");
+		maleRooms.add("209-1");
+		maleRooms.add("210-1");
+		maleRooms.add("210-2");
+		maleRooms.add("211-1");
+		maleRooms.add("211-2");
+		maleRooms.add("212-1");
+		maleRooms.add("212-2");
+		maleRooms.add("213-1");
+		maleRooms.add("213-2");
+		maleRooms.add("214-1");
+		maleRooms.add("214-2");
+		maleRooms.add("215-1");
+		maleRooms.add("215-2");
+		maleRooms.add("216-1");
+		maleRooms.add("216-2");
+		maleRooms.add("217-1");
+		maleRooms.add("217-2");
+		maleRooms.add("218-1");
+		maleRooms.add("218-2");
+		maleRooms.add("219-1");
+		maleRooms.add("219-2");
+	}
+
+	public void setFemalRooms() {
+		femaleRooms.add("B01-1");
+		femaleRooms.add("B01-2");
+		femaleRooms.add("B02-1");
+		femaleRooms.add("B02-2");
+		femaleRooms.add("B03-1");
+		femaleRooms.add("B03-2");
+		femaleRooms.add("B04-1");
+		femaleRooms.add("B04-2");
+		femaleRooms.add("B05-1");
+		femaleRooms.add("B05-2");
+		femaleRooms.add("B06-1");
+		femaleRooms.add("B06-2");
+		femaleRooms.add("B07-1");
+		femaleRooms.add("B07-2");
+		femaleRooms.add("B08-1");
+		femaleRooms.add("B08-2");
+		femaleRooms.add("B09-1");
+		femaleRooms.add("B09-2");
+		femaleRooms.add("B10-1");
+		femaleRooms.add("B10-2");
+		femaleRooms.add("B11-1");
+		femaleRooms.add("B11-2");
+		femaleRooms.add("B12-1");
+		femaleRooms.add("B12-2");
+		femaleRooms.add("B13-1");
+		femaleRooms.add("B13-1");
+		femaleRooms.add("B14-1");
+		femaleRooms.add("B15-1");
+		femaleRooms.add("B15-2");
+		femaleRooms.add("B16-1");
+		femaleRooms.add("B16-2");
 
 	}
 

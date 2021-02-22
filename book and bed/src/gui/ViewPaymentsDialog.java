@@ -18,6 +18,7 @@ public class ViewPaymentsDialog extends JDialog {
 		setSize(new Dimension(800, 800));
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 
 		paymentsTable = new PaymentsTable();
 		controller = new Controller();

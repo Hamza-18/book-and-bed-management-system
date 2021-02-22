@@ -30,6 +30,7 @@ public class DeleteEmployeeDialog extends JDialog {
 	public DeleteEmployeeDialog() {
 		setLayout(new BorderLayout());
 		setSize(new Dimension(700, 700));
+		setLocationRelativeTo(null);
 
 		deleteEmployeePanel = new DeleteEmployeePanel();
 		add(deleteEmployeePanel, BorderLayout.NORTH);

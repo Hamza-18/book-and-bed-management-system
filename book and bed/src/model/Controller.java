@@ -87,4 +87,20 @@ public class Controller {
 		database.deleteStudent(query);
 	}
 
+	public String getStudentCount() throws SQLException {
+		return database.getStudentCount() + "";
+	}
+
+	public String getMaleStudentCount() throws SQLException {
+		return database.getMaleStudentCount() + "";
+	}
+
+	public String getFemaleCount() throws SQLException {
+		return database.getFemaleStudentCount() + "";
+	}
+
+	public String getEmployeeCount() throws SQLException {
+		return database.getEmployeeCount() + "";
+	}
+
 }

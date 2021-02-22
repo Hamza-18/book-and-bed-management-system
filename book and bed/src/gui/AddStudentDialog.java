@@ -25,6 +25,8 @@ public class AddStudentDialog extends JDialog {
 	public AddStudentDialog(Student student) {
 		setLayout(new BorderLayout());
 		setMinimumSize(new Dimension(730, 600));
+		setLocationRelativeTo(null);
+
 		if (student == null) {
 			addStudentPanel = new AddStudentPanel();
 			updateStudent = false;
@@ -52,7 +54,7 @@ public class AddStudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				addStudentPanel.Reset();
+				// addStudentPanel.Reset();
 				setVisible(false);
 			}
 		});
@@ -75,7 +77,6 @@ public class AddStudentDialog extends JDialog {
 					}
 				} catch (Exception SQLIntegrityConstraintViolationException) {
 					// TODO Auto-generated catch block
-					SQLIntegrityConstraintViolationException.printStackTrace();
 					flag = false;
 					JOptionPane.showMessageDialog(null, "Student not added");
 				}

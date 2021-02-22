@@ -24,6 +24,7 @@ public class DailyExpenseDialog extends JDialog {
 		setMinimumSize(new Dimension(600, 300));
 		setSize(600, 300);
 		getContentPane().setLayout(new BorderLayout());
+		setLocationRelativeTo(null);
 
 		controller = new Controller();
 
