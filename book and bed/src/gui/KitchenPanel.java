@@ -182,7 +182,6 @@ public class KitchenPanel extends JPanel {
 
 		componenetsPanel.addComponentListener(new ComponentAdapter() {
 			public void componentResized(ComponentEvent e) {
-				System.out.println(e.getComponent().getSize().width);
 				if (e.getComponent().getSize().width > 820) {
 					monthlyExpense.setBounds(30, 201, 329, 61);
 					viewDailyExpense.setBounds(600, 69, 294, 67);

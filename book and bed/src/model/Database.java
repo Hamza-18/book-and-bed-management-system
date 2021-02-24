@@ -360,7 +360,23 @@ public class Database {
 	public ArrayList<String> getMaleRooms() throws SQLException {
 		ArrayList<String> rooms = new ArrayList<>();
 
-		String query = "Select RoomNumber from Students where Resident = 'Yes'";
+		String query = "Select RoomNumber from Students where Resident = 'Yes' and Gender = 'Male'";
+		Statement statement = connection.createStatement();
+		ResultSet checkResult = statement.executeQuery(query);
+		while (checkResult.next()) {
+
+			String room = checkResult.getString("RoomNumber");
+
+			rooms.add(room);
+		}
+
+		return rooms;
+	}
+
+	public ArrayList<String> getFemaleRooms() throws SQLException {
+		ArrayList<String> rooms = new ArrayList<>();
+
+		String query = "Select RoomNumber from Students where Resident = 'Yes' and Gender = 'Female' ";
 		Statement statement = connection.createStatement();
 		ResultSet checkResult = statement.executeQuery(query);
 		while (checkResult.next()) {

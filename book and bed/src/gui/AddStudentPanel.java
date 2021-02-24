@@ -28,6 +28,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import model.Controller;
 import model.Student;
 
 public class AddStudentPanel extends JPanel implements ItemListener {
@@ -79,6 +80,7 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 
 	private UtilDateModel model;
 
+	private Controller controller = new Controller();
 	private boolean updateStudent;
 
 	private ArrayList<String> maleRooms = new ArrayList<>();
@@ -770,6 +772,7 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		maleRooms.add("218-2");
 		maleRooms.add("219-1");
 		maleRooms.add("219-2");
+		filterMaleRooms();
 	}
 
 	public void setFemalRooms() {
@@ -804,7 +807,30 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		femaleRooms.add("B15-2");
 		femaleRooms.add("B16-1");
 		femaleRooms.add("B16-2");
-
+		filterFemaleRooms();
 	}
 
+	public void filterMaleRooms() {
+		ArrayList<String> rooms = new ArrayList<>();
+		try {
+			rooms = controller.getMaleRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		for (String room : rooms) {
+			maleRooms.remove(room);
+		}
+	}
+
+	public void filterFemaleRooms() {
+		ArrayList<String> rooms = new ArrayList<>();
+		try {
+			rooms = controller.getFemaleRooms();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		for (String room : rooms) {
+			femaleRooms.remove(room);
+		}
+	}
 }

@@ -42,7 +42,7 @@ public class ViewStudentsDialog extends JDialog {
 		searchPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		add(searchPanel, BorderLayout.NORTH);
 
-		searchLabel = new JLabel("Students");
+		searchLabel = new JLabel("Students:");
 		searchPanel.add(searchLabel);
 
 		searchBox = new JComboBox();

@@ -103,4 +103,13 @@ public class Controller {
 		return database.getEmployeeCount() + "";
 	}
 
+	public ArrayList<String> getMaleRooms() throws SQLException {
+
+		return database.getMaleRooms();
+	}
+
+	public ArrayList<String> getFemaleRooms() throws SQLException {
+		return database.getFemaleRooms();
+	}
+
 }
