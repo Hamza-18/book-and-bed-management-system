@@ -78,6 +78,7 @@ public class AddStudentDialog extends JDialog {
 				} catch (Exception SQLIntegrityConstraintViolationException) {
 					// TODO Auto-generated catch block
 					flag = false;
+					SQLIntegrityConstraintViolationException.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Student not added");
 				}
 				if (flag)

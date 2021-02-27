@@ -117,10 +117,10 @@ public class Database {
 
 	public void addStudents(Student student) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String addData = "insert into Students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		String addData = "insert into Students values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		String addDataTwo = "insert into Students(StudentName,FatherName,Gender,StudentNumber, GuardianNumber"
 				+ ", Email, BloodGroup, Address, City,Employment,University,Semester,Department,AdmissionDate,"
-				+ "Rent,SecurityFee,RoomNumber,Resident) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "Rent,SecurityFee,RoomNumber,Resident,RentPaid, RentDate) Values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 		PreparedStatement Insertstmt = connection.prepareStatement(addData);
 		if (student.getId() != null) {
@@ -148,6 +148,8 @@ public class Database {
 			} else {
 				Insertstmt.setString(19, "Yes");
 			}
+			Insertstmt.setString(20, student.getRentPaid());
+			Insertstmt.setDate(21, (Date) student.getRentDate());
 
 			Insertstmt.execute();
 		}
@@ -176,6 +178,8 @@ public class Database {
 			} else {
 				Insertstmt.setString(18, "Yes");
 			}
+			Insertstmt.setString(19, student.getRentPaid());
+			Insertstmt.setDate(20, (Date) student.getRentDate());
 
 			Insertstmt.execute();
 
@@ -242,8 +246,11 @@ public class Database {
 			String fee = checkResult.getString("SecurityFee");
 			String room = checkResult.getString("RoomNumber");
 			String resident = checkResult.getString("Resident");
+			String rentPaid = checkResult.getString("RentPaid");
+			Date rentDate = checkResult.getDate("RentDate");
 			students.add(new Student(id, studentName, fatherName, gender, studentNumber, guardianNumber, email, blood,
-					address, city, employment, uni, sem, department, date, rent, fee, room, resident));
+					address, city, employment, uni, sem, department, date, rent, fee, room, rentPaid, rentDate,
+					resident));
 		}
 		checkResult.close();
 		selectStmt.close();

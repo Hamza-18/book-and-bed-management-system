@@ -22,13 +22,14 @@ public class Student {
 	private String securityFee;
 	private String roomNumber;
 	private String resident;
-	private static int count = 0;
+	private String rentPaid;
+	private Date rentDate;
 
 	public Student(String id, String studentName, String fatherName, String gender, String studentNumber,
 
 			String guardianNumber, String studentEmail, String bloodGroup, String address, String city,
 			String employment, String university, String semester, String department, Date admissiondate, String rent,
-			String securityFee, String roomNumber) {
+			String securityFee, String roomNumber, String rentPaid, Date rentDate) {
 		setId(id);
 		setName(studentName);
 		setFatherName(fatherName);
@@ -47,24 +48,26 @@ public class Student {
 		setRent(rent);
 		setSecurityFee(securityFee);
 		setRoomNumber(roomNumber);
-
+		setRentPaid(rentPaid);
+		setRentDate(rentDate);
 	}
 
 	public Student(String id, String studentName, String fatherName, String gender, String studentNumber,
 
 			String guardianNumber, String studentEmail, String bloodGroup, String address, String city,
 			String employment, String university, String semester, String department, Date admissiondate, String rent,
-			String securityFee, String roomNumber, String resident) {
+			String securityFee, String roomNumber, String rentPaid, Date rentDate, String resident) {
 
 		this(id, studentName, fatherName, gender, studentNumber, guardianNumber, studentEmail, bloodGroup, address,
-				city, employment, university, semester, department, admissiondate, rent, securityFee, roomNumber);
+				city, employment, university, semester, department, admissiondate, rent, securityFee, roomNumber,
+				rentPaid, rentDate);
 		setResident(resident);
 	}
 
 	public Student(String studentName, String fatherName, String gender, String studentNumber, String guardianNumber,
 			String studentEmail, String bloodGroup, String address, String city, String employment, String university,
-			String semester, String department, Date admissiondate, String rent, String securityFee,
-			String roomNumber) {
+			String semester, String department, Date admissiondate, String rent, String securityFee, String roomNumber,
+			String rentPaid, Date rentDate) {
 
 		setName(studentName);
 		setFatherName(fatherName);
@@ -83,7 +86,8 @@ public class Student {
 		setRent(rent);
 		setSecurityFee(securityFee);
 		setRoomNumber(roomNumber);
-
+		setRentPaid(rentPaid);
+		setRentDate(rentDate);
 	}
 
 	public String getId() {
@@ -238,4 +242,19 @@ public class Student {
 		return resident;
 	}
 
+	public void setRentPaid(String rentPaid) {
+		this.rentPaid = rentPaid;
+	}
+
+	public String getRentPaid() {
+		return rentPaid;
+	}
+
+	public void setRentDate(Date rentDate) {
+		this.rentDate = rentDate;
+	}
+
+	public Date getRentDate() {
+		return rentDate;
+	}
 }

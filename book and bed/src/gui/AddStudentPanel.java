@@ -84,6 +84,7 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 	private JComboBox rentPaid;
 
 	private UtilDateModel model;
+	private UtilDateModel rentModel;
 
 	private Controller controller = new Controller();
 	private boolean updateStudent;
@@ -131,14 +132,27 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		rent.setText(student.getRent());
 		securityFee.setText(student.getSecurityFee());
 		String room = student.getRoomNumber();
+
+		// set gender of student
 		if (maleRadioBtn.isSelected()) {
 
 			roomNumberBox.setSelectedIndex(maleRooms.indexOf(room));
 		} else {
 			roomNumberBox.setSelectedIndex(femaleRooms.indexOf(room));
 		}
-		// roomNumber.setText(student.getRoomNumber());
 
+		// set rent paid
+
+		if (student.getRentPaid().equals("Yes"))
+			rentPaid.setSelectedIndex(0);
+		else {
+			rentPaid.setSelectedIndex(1);
+		}
+
+		// rent pay date
+		java.util.Date rentpayDate = student.getAdmissionDate();
+		rentModel.setValue(rentpayDate);
+		// set resident
 		if (student.getResident().equals("Yes")) {
 			resident.setSelectedIndex(0);
 		} else {
@@ -581,9 +595,9 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		rentDateLabelConstraints.gridy = 10;
 		panel.add(rentDateLabel, rentDateLabelConstraints);
 
-		model = new UtilDateModel();
-		model.setSelected(true);
-		JDatePanelImpl rentDatePanel = new JDatePanelImpl(model, p);
+		rentModel = new UtilDateModel();
+		rentModel.setSelected(true);
+		JDatePanelImpl rentDatePanel = new JDatePanelImpl(rentModel, p);
 		rentDate = new JDatePickerImpl(rentDatePanel, new DateLabelFormatter());
 		GridBagConstraints rentDateConstraints = new GridBagConstraints();
 		rentBagConstraints.anchor = GridBagConstraints.WEST;
@@ -638,26 +652,31 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 			String studentUniversity = this.university.getText();
 			String studentSemester = this.semester.getText();
 			String studentDepartment = this.department.getText();
-			Date studentAdmissionDate = getDate();
+			Date studentAdmissionDate = getDate(admissionDate);
 			String studentRent = this.rent.getText();
 			String studentSecurityFee = this.securityFee.getText();
 			String room = (String) roomNumberBox.getSelectedItem();
+			String rent = (String) rentPaid.getSelectedItem();
+			Date rentPayDate = getDate(rentDate);
+
 			if (!updateStudent) {
 				if (id.equals("")) {
 					student = new Student(name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
 							studentAddresss, studentCity, employment, studentUniversity, studentSemester,
-							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room);
+							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room, rent,
+							rentPayDate);
 				} else {
 					student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email,
 							bloodGroup, studentAddresss, studentCity, employment, studentUniversity, studentSemester,
-							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room);
+							studentDepartment, studentAdmissionDate, studentRent, studentSecurityFee, room, rent,
+							rentPayDate);
 				}
 			} else {
 				String resident = (String) this.resident.getSelectedItem();
 				System.out.println(resident);
 				student = new Student(id, name, father, studentGender, studentPhone, guardianPhone, email, bloodGroup,
 						studentAddresss, studentCity, employment, studentUniversity, studentSemester, studentDepartment,
-						studentAdmissionDate, studentRent, studentSecurityFee, room, resident);
+						studentAdmissionDate, studentRent, studentSecurityFee, room, rent, rentPayDate, resident);
 
 			}
 			return student;
@@ -668,11 +687,11 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		return null;
 	}
 
-	public Date getDate() {
+	public Date getDate(JDatePickerImpl datePicker) {
 
-		String month = (admissionDate.getModel().getMonth() + 1) + "";
-		String day = admissionDate.getModel().getDay() + "";
-		String year = admissionDate.getModel().getYear() + "";
+		String month = (datePicker.getModel().getMonth() + 1) + "";
+		String day = datePicker.getModel().getDay() + "";
+		String year = datePicker.getModel().getYear() + "";
 		if (month.length() == 1) {
 			month = "0" + month;
 		}

@@ -9,8 +9,8 @@ import model.Student;
 public class StudentsTableModel extends AbstractTableModel {
 	private ArrayList<Student> studentsList;
 	private String[] columnNames = { "StudentId", "StudentName", "StudentNumber", "RoomNumber", "Rent", "SecurityFee",
-			"University", "Department", "Semester", "AdmissionDate", "Gender", "FatherName", "GuardianNumber",
-			"Address", "City", "Email", "BloodGroup", "Employment", "Resident" };
+			"RentPaid", "RentDate", "University", "Department", "Semester", "AdmissionDate", "Gender", "FatherName",
+			"GuardianNumber", "Address", "City", "Email", "BloodGroup", "Employment", "Resident" };
 
 	public StudentsTableModel() {
 		studentsList = new ArrayList<>();
@@ -30,7 +30,6 @@ public class StudentsTableModel extends AbstractTableModel {
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
 		return columnNames.length;
 	}
 
@@ -52,43 +51,43 @@ public class StudentsTableModel extends AbstractTableModel {
 
 		case 1:
 			return student.getName();
-
 		case 2:
 			return student.getStudentNumber();
-
 		case 3:
 			return student.getRoomNumber();
 		case 4:
 			return student.getRent();
 		case 5:
 			return student.getSecurityFee();
-
 		case 6:
-			return student.getUniversity();
+			return student.getRentPaid();
 		case 7:
-			return student.getDepartment();
+			return student.getRentDate();
 		case 8:
-			return student.getSemester();
+			return student.getUniversity();
 		case 9:
-			return student.getAdmissionDate();
-
+			return student.getDepartment();
 		case 10:
-			return student.getGender();
+			return student.getSemester();
 		case 11:
-			return student.getFatherName();
+			return student.getAdmissionDate();
 		case 12:
-			return student.getGuardianNumber();
+			return student.getGender();
 		case 13:
-			return student.getAddress();
+			return student.getFatherName();
 		case 14:
-			return student.getCity();
+			return student.getGuardianNumber();
 		case 15:
-			return student.getStudentEmail();
+			return student.getAddress();
 		case 16:
-			return student.getBloodGroup();
+			return student.getCity();
 		case 17:
-			return student.getEmployment();
+			return student.getStudentEmail();
 		case 18:
+			return student.getBloodGroup();
+		case 19:
+			return student.getEmployment();
+		case 20:
 			return student.getResident();
 		}
 
