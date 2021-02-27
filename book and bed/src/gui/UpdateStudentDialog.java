@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -69,9 +70,15 @@ public class UpdateStudentDialog extends JDialog {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String query = " where StudentId = " + "'" + Long.parseLong(studentId.getText()) + "'";
-				Student student = controller.getStudents(query).get(0);
-				addStudentDialog = new AddStudentDialog(student);
-				addStudentDialog.setVisible(true);
+				try {
+					Student student = controller.getStudents(query).get(0);
+					addStudentDialog = new AddStudentDialog(student);
+					addStudentDialog.setVisible(true);
+				} catch (IndexOutOfBoundsException e) {
+					JOptionPane.showMessageDialog(null, "Student ID entered is not correct or student not found.");
+
+				}
+
 			}
 		});
 	}

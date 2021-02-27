@@ -53,6 +53,8 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 	private JLabel lblNewLabel_14;
 	private JLabel lblNewLabel_15;
 	private JLabel residentLabel;
+	private JLabel rentLabel;
+	private JLabel rentDateLabel;
 
 	private JRadioButton maleRadioBtn;
 	private JRadioButton femaleRadioBtn;
@@ -75,8 +77,11 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 	private JTextField securityFee;
 	private JTextField roomNumber;
 	private JTextField department;
+	private JDatePickerImpl rentDate;
+
 	private JComboBox resident;
 	private JComboBox roomNumberBox;
+	private JComboBox rentPaid;
 
 	private UtilDateModel model;
 
@@ -547,24 +552,53 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		gbc_roomNumber.gridy = 9;
 		panel.add(roomNumberBox, gbc_roomNumber);
 
-//		roomNumber = new JTextField();
-//		roomNumber.setFont(new Font("Dialog", Font.PLAIN, 14));
-//		roomNumber.setColumns(10);
-//		roomNumber.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
-//		GridBagConstraints gbc_roomNumber = new GridBagConstraints();
-//		gbc_roomNumber.anchor = GridBagConstraints.WEST;
-//		gbc_roomNumber.gridx = 3;
-//		gbc_roomNumber.gridy = 9;
-//		panel.add(roomNumber, gbc_roomNumber);
+		rentLabel = new JLabel("Rent Paid: ");
+		rentLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints rentBagConstraints = new GridBagConstraints();
+		rentBagConstraints.insets = new Insets(0, 10, 0, 5);
+		rentBagConstraints.anchor = GridBagConstraints.EAST;
+		rentBagConstraints.gridx = 0;
+		rentBagConstraints.gridy = 10;
+		panel.add(rentLabel, rentBagConstraints);
+
+		rentPaid = new JComboBox();
+		DefaultComboBoxModel rentBoxModel = new DefaultComboBoxModel();
+		rentBoxModel.addElement("Yes");
+		rentBoxModel.addElement("No");
+		rentPaid.setModel(rentBoxModel);
+		GridBagConstraints rentConstraints = new GridBagConstraints();
+		rentConstraints.anchor = GridBagConstraints.WEST;
+		rentConstraints.insets = new Insets(0, 0, 10, 0);
+		rentConstraints.gridx = 1;
+		rentConstraints.gridy = 10;
+		panel.add(rentPaid, rentConstraints);
+
+		rentDateLabel = new JLabel("Rent Date: ");
+		rentDateLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
+		GridBagConstraints rentDateLabelConstraints = new GridBagConstraints();
+		rentDateLabelConstraints.anchor = GridBagConstraints.EAST;
+		rentDateLabelConstraints.gridx = 2;
+		rentDateLabelConstraints.gridy = 10;
+		panel.add(rentDateLabel, rentDateLabelConstraints);
+
+		model = new UtilDateModel();
+		model.setSelected(true);
+		JDatePanelImpl rentDatePanel = new JDatePanelImpl(model, p);
+		rentDate = new JDatePickerImpl(rentDatePanel, new DateLabelFormatter());
+		GridBagConstraints rentDateConstraints = new GridBagConstraints();
+		rentBagConstraints.anchor = GridBagConstraints.WEST;
+		rentBagConstraints.gridx = 3;
+		rentBagConstraints.gridy = 10;
+		panel.add(rentDate, rentBagConstraints);
 
 		if (updateStudent) {
 			residentLabel = new JLabel("Resident:");
 			residentLabel.setFont(new Font("Dialog", Font.PLAIN, 18));
 			GridBagConstraints gbc_residentLabel = new GridBagConstraints();
 			gbc_residentLabel.anchor = GridBagConstraints.EAST;
-			gbc_residentLabel.insets = new Insets(0, 10, 0, 5);
+			gbc_residentLabel.insets = new Insets(10, 10, 0, 5);
 			gbc_residentLabel.gridx = 0;
-			gbc_residentLabel.gridy = 10;
+			gbc_residentLabel.gridy = 11;
 			panel.add(residentLabel, gbc_residentLabel);
 
 			resident = new JComboBox();
@@ -576,8 +610,9 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 			resident.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
 			GridBagConstraints gbc_resident = new GridBagConstraints();
 			gbc_resident.anchor = GridBagConstraints.WEST;
+			gbc_resident.insets = new Insets(10, 0, 0, 0);
 			gbc_resident.gridx = 1;
-			gbc_resident.gridy = 10;
+			gbc_resident.gridy = 11;
 			panel.add(resident, gbc_resident);
 		}
 		setVisible(true);
