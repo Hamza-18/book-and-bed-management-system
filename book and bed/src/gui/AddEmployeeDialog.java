@@ -27,6 +27,7 @@ public class AddEmployeeDialog extends JDialog {
 
 	public AddEmployeeDialog(Employee employee) {
 		setBackground(Color.WHITE);
+		setMinimumSize(new Dimension(600, 333));
 		setSize(new Dimension(600, 333));
 		setLocationRelativeTo(null);
 

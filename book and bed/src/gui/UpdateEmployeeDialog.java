@@ -32,7 +32,8 @@ public class UpdateEmployeeDialog extends JDialog {
 	public UpdateEmployeeDialog() {
 		setLayout(new BorderLayout());
 		setBackground(Color.WHITE);
-		setSize(new Dimension(700, 700));
+		setMinimumSize(new Dimension(750, 700));
+		setSize(new Dimension(750, 700));
 		setLocationRelativeTo(null);
 
 		controller = new Controller();
