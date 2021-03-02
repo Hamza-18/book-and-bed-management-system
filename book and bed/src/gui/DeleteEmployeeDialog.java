@@ -74,8 +74,10 @@ public class DeleteEmployeeDialog extends JDialog {
 						employeeTable.refresh();
 						JOptionPane.showMessageDialog(null, "Employee has been deleted");
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
+						JOptionPane.showMessageDialog(null, "Employee not deleted");
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Please enter Employee ID");
 				}
 			}
 		});

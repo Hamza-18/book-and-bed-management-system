@@ -184,7 +184,7 @@ public class AddEmployeePanel extends JPanel {
 		employeeDuration.setModel(comboModel);
 
 		GridBagConstraints gbc_employeeDuration = new GridBagConstraints();
-		gbc_employeeDuration.insets = new Insets(0, 0, 5, 5);
+		gbc_employeeDuration.insets = new Insets(0, 0, 5, 10);
 		gbc_employeeDuration.fill = GridBagConstraints.HORIZONTAL;
 		gbc_employeeDuration.gridx = 1;
 		gbc_employeeDuration.gridy = 3;
@@ -194,7 +194,7 @@ public class AddEmployeePanel extends JPanel {
 		lblWork.setFont(new Font("Dialog", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblWork = new GridBagConstraints();
 		gbc_lblWork.anchor = GridBagConstraints.EAST;
-		gbc_lblWork.insets = new Insets(0, 0, 5, 5);
+		gbc_lblWork.insets = new Insets(0, 0, 10, 5);
 		gbc_lblWork.gridx = 2;
 		gbc_lblWork.gridy = 3;
 		add(lblWork, gbc_lblWork);

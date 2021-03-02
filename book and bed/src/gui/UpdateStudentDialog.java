@@ -69,16 +69,19 @@ public class UpdateStudentDialog extends JDialog {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String query = " where StudentId = " + "'" + Long.parseLong(studentId.getText()) + "'";
-				try {
-					Student student = controller.getStudents(query).get(0);
-					addStudentDialog = new AddStudentDialog(student);
-					addStudentDialog.setVisible(true);
-				} catch (IndexOutOfBoundsException e) {
-					JOptionPane.showMessageDialog(null, "Student ID entered is not correct or student not found.");
+				if (!studentId.getText().equals("")) {
+					String query = " where StudentId = " + "'" + Long.parseLong(studentId.getText()) + "'";
+					try {
+						Student student = controller.getStudents(query).get(0);
+						addStudentDialog = new AddStudentDialog(student);
+						addStudentDialog.setVisible(true);
+					} catch (IndexOutOfBoundsException e) {
+						JOptionPane.showMessageDialog(null, "Student ID entered is not correct or student not found.");
 
+					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Please enter Student ID.");
 				}
-
 			}
 		});
 	}

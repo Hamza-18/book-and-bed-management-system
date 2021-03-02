@@ -14,7 +14,7 @@ public class Driver {
 		loginFrame.setContentPane(loginPanel);
 		loginFrame.setVisible(true);
 		loginFrame.setSize(new Dimension(798, 492));
-//		loginFrame.setResizable(false);
+		loginFrame.setResizable(false);
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.setLocationRelativeTo(null);
 		loginPanel.loginListener(new LoginInterface() {
@@ -22,10 +22,10 @@ public class Driver {
 			@Override
 			public void passLogin(boolean flag) {
 				// TODO Auto-generated method stub
-//				if (flag) {
-				loginFrame.setVisible(false);
-				dashboard.setVisible(true);
-//				}
+				if (flag) {
+					loginFrame.setVisible(false);
+					dashboard.setVisible(true);
+				}
 			}
 		});
 	}

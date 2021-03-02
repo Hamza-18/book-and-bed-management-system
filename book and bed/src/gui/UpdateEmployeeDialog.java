@@ -73,9 +73,16 @@ public class UpdateEmployeeDialog extends JDialog {
 					JOptionPane.showMessageDialog(null, "Please enter employee Id");
 				} else {
 					String query = " where EmployeeId = " + "'" + Long.parseLong(employeeId.getText()) + "'";
-					Employee employee = controller.getEmployees(query).get(0);
-					addEmployeeDialog = new AddEmployeeDialog(employee);
-					addEmployeeDialog.setVisible(true);
+					try {
+						Employee employee = controller.getEmployees(query).get(0);
+						addEmployeeDialog = new AddEmployeeDialog(employee);
+						addEmployeeDialog.setVisible(true);
+
+					} catch (IndexOutOfBoundsException e) {
+						JOptionPane.showMessageDialog(null,
+								"Employee ID entered is not correct or employee not found.");
+
+					}
 				}
 			}
 		});

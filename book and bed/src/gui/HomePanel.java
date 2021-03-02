@@ -61,54 +61,54 @@ public class HomePanel extends JPanel {
 		add(componentsPanel, BorderLayout.CENTER);
 
 		totalStudentPanel = new JPanel();
-		totalStudentPanel.setBounds(25, 43, 224, 57);
+		totalStudentPanel.setBounds(25, 43, 228, 57);
 		componentsPanel.add(totalStudentPanel);
 
 		totalStudentsLabel = new JLabel("Total Students");
-		totalStudentsLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		totalStudentsLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 		totalStudentPanel.add(totalStudentsLabel);
 
 		totalEmployeePanel = new JPanel();
-		totalEmployeePanel.setBounds(470, 43, 235, 57);
+		totalEmployeePanel.setBounds(477, 43, 228, 57);
 		componentsPanel.add(totalEmployeePanel);
 
 		totalEmployeesLabel = new JLabel("Total Employees");
-		totalEmployeesLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		totalEmployeesLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 		totalEmployeePanel.add(totalEmployeesLabel);
 
 		students = new JLabel("0");
-		students.setFont(new Font("Dialog", Font.PLAIN, 40));
+		students.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 40));
 		students.setBounds(113, 112, 91, 63);
 		componentsPanel.add(students);
 
 		employees = new JLabel("0");
-		employees.setFont(new Font("Dialog", Font.PLAIN, 40));
+		employees.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 40));
 		employees.setBounds(558, 106, 91, 74);
 		componentsPanel.add(employees);
 
 		maleStudentPanel = new JPanel();
-		maleStudentPanel.setBounds(25, 198, 205, 48);
+		maleStudentPanel.setBounds(25, 198, 228, 57);
 		componentsPanel.add(maleStudentPanel);
 
 		maleStudentslabel = new JLabel("Male Students");
-		maleStudentslabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		maleStudentslabel.setFont(new Font("Dialog", Font.BOLD, 24));
 		maleStudentPanel.add(maleStudentslabel);
 
 		femaleStudentPanel = new JPanel();
-		femaleStudentPanel.setBounds(462, 192, 243, 48);
+		femaleStudentPanel.setBounds(477, 192, 228, 57);
 		componentsPanel.add(femaleStudentPanel);
 
 		femaleStudentsLabel = new JLabel("Female Students");
-		femaleStudentsLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		femaleStudentsLabel.setFont(new Font("Dialog", Font.BOLD, 24));
 		femaleStudentPanel.add(femaleStudentsLabel);
 
 		maleStudents = new JLabel("0");
-		maleStudents.setFont(new Font("Dialog", Font.PLAIN, 40));
+		maleStudents.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 40));
 		maleStudents.setBounds(113, 258, 91, 63);
 		componentsPanel.add(maleStudents);
 
 		femaleStudents = new JLabel("0");
-		femaleStudents.setFont(new Font("Dialog", Font.PLAIN, 40));
+		femaleStudents.setFont(new Font("DejaVu Sans Mono", Font.PLAIN, 40));
 		femaleStudents.setBounds(558, 252, 91, 63);
 		componentsPanel.add(femaleStudents);
 
