@@ -1,8 +1,10 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class Driver {
 
@@ -10,13 +12,18 @@ public class Driver {
 		//// https://github.com/Hamza-18/book-and-bed-management-system.git
 		Dashboard dashboard = new Dashboard();
 		LoginPanel loginPanel = new LoginPanel();
+		JPanel contentPanel = new JPanel();
 		JFrame loginFrame = new JFrame();
-		loginFrame.setContentPane(loginPanel);
+
+		contentPanel.setLayout(new BorderLayout());
+		contentPanel.add(loginPanel, BorderLayout.CENTER);
+		loginFrame.setContentPane(contentPanel);
 		loginFrame.setVisible(true);
 		loginFrame.setSize(new Dimension(798, 492));
-		loginFrame.setResizable(false);
+		loginFrame.setMaximumSize(new Dimension(798, 492));
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.setLocationRelativeTo(null);
+		loginFrame.repaint();
 		loginPanel.loginListener(new LoginInterface() {
 
 			@Override

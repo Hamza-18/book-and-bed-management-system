@@ -1,10 +1,12 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +16,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.border.MatteBorder;
 
 public class LoginPanel extends JPanel {
@@ -24,32 +25,39 @@ public class LoginPanel extends JPanel {
 	private static final String PASSWORD = "admin";
 	private static final String USER_NAME = "admin";
 	private LoginInterface loginInterface;
+	private JPanel logoPanel;
+	private JPanel credentialsPanel;
 
 	public LoginPanel() {
-		setVisible(true);
-		setLayout(null);
-		setSize(798, 492);
-		setMaximumSize(new Dimension(798, 492));
-		Dimension dimension = getSize();
+		setLayout(new BorderLayout());
 
-		JPanel logoPanel = new JPanel();
-		logoPanel.setBounds(0, 0, 424, 474);
-		logoPanel.setLayout(null);
+		logoPanel = new JPanel();
+		logoPanel.setSize(200, 100);
+		logoPanel.setLayout(new GridBagLayout());
 		logoPanel.isVisible();
 		logoPanel.setBackground(new Color(46, 45, 45));
-		add(logoPanel);
+		add(logoPanel, BorderLayout.WEST);
 
 		JLabel logo = new JLabel("");
-		logo.setHorizontalAlignment(SwingConstants.CENTER);
-		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
-		logo.setBounds(61, 96, 253, 318);
-		logoPanel.add(logo);
+		GridBagConstraints gbc_logo = new GridBagConstraints();
+		gbc_logo.insets = new Insets(0, 100, 0, 100);
+		logoPanel.add(logo, gbc_logo);
+
+		icon = new ImageIcon(LoginPanel.class.getResource("/res/book and bed Logo.png")).getImage()
+				.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+		logo.setIcon(new ImageIcon(icon));
+
+		credentialsPanel = new JPanel();
+		credentialsPanel.setLayout(new BorderLayout());
+		credentialsPanel.setBackground(Color.white);
+		credentialsPanel.setSize(300, 300);
+		add(credentialsPanel, BorderLayout.CENTER);
 
 		JPanel userPanel = new JPanel();
 		userPanel.setBounds(424, 0, 376, 474);
 		userPanel.setLayout(null);
 		userPanel.setBackground(new Color(255, 255, 255));
-		add(userPanel);
+		credentialsPanel.add(userPanel, BorderLayout.CENTER);
 
 		userName = new JTextField();
 		userName.setForeground(new Color(105, 105, 105));
@@ -85,10 +93,6 @@ public class LoginPanel extends JPanel {
 		warning.setBounds(25, 305, 326, 15);
 		userPanel.add(warning);
 
-		icon = new ImageIcon(LoginPanel.class.getResource("/res/book and bed Logo.png")).getImage()
-				.getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-		logo.setIcon(new ImageIcon(icon));
-
 		loginBtn.addActionListener(new ActionListener() {
 
 			@Override
@@ -104,6 +108,28 @@ public class LoginPanel extends JPanel {
 			}
 		});
 	}
+
+//	public LoginPanel() {
+//		setVisible(true);
+//		setLayout(null);
+//		setSize(798, 492);
+//		Dimension dimension = getSize();
+//
+//		JPanel logoPanel = new JPanel();
+//		logoPanel.setBounds(0, 0, 424, 474);
+//		logoPanel.setLayout(null);
+//		logoPanel.isVisible();
+//		logoPanel.setBackground(new Color(46, 45, 45));
+//		add(logoPanel);
+//
+//		JLabel logo = new JLabel("");
+//		logo.setHorizontalAlignment(SwingConstants.CENTER);
+//		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
+//		logo.setBounds(61, 96, 253, 318);
+//		logoPanel.add(logo);
+//
+
+//	}
 
 	public void loginListener(LoginInterface loginInterface) {
 		this.loginInterface = loginInterface;
