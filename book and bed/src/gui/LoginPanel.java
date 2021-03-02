@@ -109,28 +109,6 @@ public class LoginPanel extends JPanel {
 		});
 	}
 
-//	public LoginPanel() {
-//		setVisible(true);
-//		setLayout(null);
-//		setSize(798, 492);
-//		Dimension dimension = getSize();
-//
-//		JPanel logoPanel = new JPanel();
-//		logoPanel.setBounds(0, 0, 424, 474);
-//		logoPanel.setLayout(null);
-//		logoPanel.isVisible();
-//		logoPanel.setBackground(new Color(46, 45, 45));
-//		add(logoPanel);
-//
-//		JLabel logo = new JLabel("");
-//		logo.setHorizontalAlignment(SwingConstants.CENTER);
-//		logo.setAlignmentX(Component.CENTER_ALIGNMENT);
-//		logo.setBounds(61, 96, 253, 318);
-//		logoPanel.add(logo);
-//
-
-//	}
-
 	public void loginListener(LoginInterface loginInterface) {
 		this.loginInterface = loginInterface;
 	}
