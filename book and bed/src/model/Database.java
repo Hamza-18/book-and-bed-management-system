@@ -25,6 +25,8 @@ public class Database {
 		employees = new ArrayList<>();
 		monthlyExpense = new ArrayList<>();
 		dailyExpense = new ArrayList<>();
+		paidFeeStudents = new ArrayList<>();
+		unPaidFeeStudents = new ArrayList<>();
 	}
 
 	public void setConnection() throws Exception {

@@ -112,4 +112,12 @@ public class Controller {
 		return database.getFemaleRooms();
 	}
 
+	public ArrayList<Student> getPaidStudents(String month) throws SQLException {
+		return database.getPaidStudents(month);
+	}
+
+	public ArrayList<Student> getUnPaidStudents(String month) throws SQLException {
+		return database.getUnPaidStudents(month);
+	}
+
 }
