@@ -16,6 +16,8 @@ public class Database {
 	private ArrayList<Employee> employees;
 	private ArrayList<Kitchen> monthlyExpense;
 	private ArrayList<Kitchen> dailyExpense;
+	private ArrayList<Student> paidFeeStudents;
+	private ArrayList<Student> unPaidFeeStudents;
 	private Connection connection;
 
 	public Database() {
@@ -255,6 +257,80 @@ public class Database {
 		checkResult.close();
 		selectStmt.close();
 		return students;
+	}
+
+	public ArrayList<Student> getPaidStudents(String month) throws SQLException {
+		paidFeeStudents.clear();
+		String getDb;
+		getDb = "select * from Students where Month(AdmissionDate) = " + "'" + month + "'" + "and RentPaid = 'Yes' ";
+		Statement selectStmt = connection.createStatement();
+		ResultSet checkResult = selectStmt.executeQuery(getDb);
+		while (checkResult.next()) {
+			String id = checkResult.getLong("StudentId") + "";
+			String studentName = checkResult.getString("StudentName");
+			String fatherName = checkResult.getString("FatherName");
+			String gender = checkResult.getString("Gender");
+			String studentNumber = checkResult.getString("StudentNumber");
+			String guardianNumber = checkResult.getString("GuardianNumber");
+			String email = checkResult.getString("Email");
+			String blood = checkResult.getString("BloodGroup");
+			String address = checkResult.getString("Address");
+			String city = checkResult.getString("City");
+			String employment = checkResult.getString("Employment");
+			String uni = checkResult.getString("University");
+			String sem = checkResult.getString("Semester");
+			String department = checkResult.getString("Department");
+			Date date = checkResult.getDate("AdmissionDate");
+			String rent = checkResult.getString("Rent");
+			String fee = checkResult.getString("SecurityFee");
+			String room = checkResult.getString("RoomNumber");
+			String resident = checkResult.getString("Resident");
+			String rentPaid = checkResult.getString("RentPaid");
+			Date rentDate = checkResult.getDate("RentDate");
+			paidFeeStudents.add(new Student(id, studentName, fatherName, gender, studentNumber, guardianNumber, email,
+					blood, address, city, employment, uni, sem, department, date, rent, fee, room, rentPaid, rentDate,
+					resident));
+		}
+		checkResult.close();
+		selectStmt.close();
+		return paidFeeStudents;
+	}
+
+	public ArrayList<Student> getUnPaidStudents(String month) throws SQLException {
+		unPaidFeeStudents.clear();
+		String getDb;
+		getDb = "select * from Students where Month(AdmissionDate) = " + "'" + month + "'" + "and RentPaid = 'No' ";
+		Statement selectStmt = connection.createStatement();
+		ResultSet checkResult = selectStmt.executeQuery(getDb);
+		while (checkResult.next()) {
+			String id = checkResult.getLong("StudentId") + "";
+			String studentName = checkResult.getString("StudentName");
+			String fatherName = checkResult.getString("FatherName");
+			String gender = checkResult.getString("Gender");
+			String studentNumber = checkResult.getString("StudentNumber");
+			String guardianNumber = checkResult.getString("GuardianNumber");
+			String email = checkResult.getString("Email");
+			String blood = checkResult.getString("BloodGroup");
+			String address = checkResult.getString("Address");
+			String city = checkResult.getString("City");
+			String employment = checkResult.getString("Employment");
+			String uni = checkResult.getString("University");
+			String sem = checkResult.getString("Semester");
+			String department = checkResult.getString("Department");
+			Date date = checkResult.getDate("AdmissionDate");
+			String rent = checkResult.getString("Rent");
+			String fee = checkResult.getString("SecurityFee");
+			String room = checkResult.getString("RoomNumber");
+			String resident = checkResult.getString("Resident");
+			String rentPaid = checkResult.getString("RentPaid");
+			Date rentDate = checkResult.getDate("RentDate");
+			unPaidFeeStudents.add(new Student(id, studentName, fatherName, gender, studentNumber, guardianNumber, email,
+					blood, address, city, employment, uni, sem, department, date, rent, fee, room, rentPaid, rentDate,
+					resident));
+		}
+		checkResult.close();
+		selectStmt.close();
+		return unPaidFeeStudents;
 	}
 
 	public ArrayList<Employee> getPayments(String query) throws SQLException {

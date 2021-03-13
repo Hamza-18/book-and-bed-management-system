@@ -91,6 +91,7 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 
 	private ArrayList<String> maleRooms = new ArrayList<>();
 	private ArrayList<String> femaleRooms = new ArrayList<>();
+	private String updateRoom;
 
 	public AddStudentPanel() {
 		updateStudent = false;
@@ -132,6 +133,7 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		rent.setText(student.getRent());
 		securityFee.setText(student.getSecurityFee());
 		String room = student.getRoomNumber();
+		updateRoom = room;
 
 		// set gender of student
 		if (maleRadioBtn.isSelected()) {
@@ -655,7 +657,16 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 			Date studentAdmissionDate = getDate(admissionDate);
 			String studentRent = this.rent.getText();
 			String studentSecurityFee = this.securityFee.getText();
-			String room = (String) roomNumberBox.getSelectedItem();
+			String room;
+			if (updateStudent) {
+				if (roomNumberBox.getSelectedItem() == null) {
+					room = updateRoom;
+				} else {
+					room = (String) roomNumberBox.getSelectedItem();
+				}
+			} else {
+				room = (String) roomNumberBox.getSelectedItem();
+			}
 			String rent = (String) rentPaid.getSelectedItem();
 			Date rentPayDate = getDate(rentDate);
 
@@ -717,7 +728,6 @@ public class AddStudentPanel extends JPanel implements ItemListener {
 		semester.setText("");
 		rent.setText("");
 		securityFee.setText("");
-		roomNumber.setText("");
 		department.setText("");
 
 	}

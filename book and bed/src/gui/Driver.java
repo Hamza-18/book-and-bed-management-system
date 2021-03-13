@@ -24,6 +24,7 @@ public class Driver {
 		loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		loginFrame.setLocationRelativeTo(null);
 		loginFrame.repaint();
+
 		loginPanel.loginListener(new LoginInterface() {
 
 			@Override

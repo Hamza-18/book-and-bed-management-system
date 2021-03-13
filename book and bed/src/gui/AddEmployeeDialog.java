@@ -81,6 +81,7 @@ public class AddEmployeeDialog extends JDialog {
 				} catch (Exception SQLIntegrityConstraintViolationException) {
 					// TODO Auto-generated catch block
 					flag = false;
+					SQLIntegrityConstraintViolationException.printStackTrace();
 					JOptionPane.showMessageDialog(null,
 							"Employee with same ID already exists, Please choose a different ID");
 				}
