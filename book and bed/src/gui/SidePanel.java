@@ -12,6 +12,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 public class SidePanel extends JPanel {
@@ -20,11 +21,13 @@ public class SidePanel extends JPanel {
 	private JPanel studentPanel;
 	private JPanel employeePanel;
 	private JPanel kitchenPanel;
+	private JPanel notificationsPanel;
 
 	private JLabel homeLabel;
 	private JLabel studentsLabel;
 	private JLabel employeeLabel;
 	private JLabel kitchenLabel;
+	private JLabel notificationLabel;
 
 	private static final int BASIC_RED = 255;
 	private static final int BASiC_GREEN = 255;
@@ -180,13 +183,48 @@ public class SidePanel extends JPanel {
 
 			}
 		});
+
+		notificationsPanel.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				setPanelColor(notificationsPanel);
+				sidePanelInterface.setPanel("notificationsPanel");
+
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 	}
 
 	public void setPanelLayout(GridBagLayout gridBagLayout) {
 		gridBagLayout.columnWidths = new int[] { 0, 0 };
-		gridBagLayout.rowHeights = new int[] { 48, 46, 45, 49, 31, 0 };
+		gridBagLayout.rowHeights = new int[] { 48, 46, 45, 49, 31, 0, 0 };
 		gridBagLayout.columnWeights = new double[] { 1.0, Double.MIN_VALUE };
-		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		gridBagLayout.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		setLayout(gridBagLayout);
 
 		homePanel = new JPanel();
@@ -235,7 +273,8 @@ public class SidePanel extends JPanel {
 		kitchenPanel.setBackground(new Color(BASIC_RED, BASiC_GREEN, BASIC_BLUE));
 		kitchenPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		GridBagConstraints gbc_kitchenPanel = new GridBagConstraints();
-		gbc_kitchenPanel.fill = GridBagConstraints.BOTH;
+		gbc_kitchenPanel.insets = new Insets(0, 0, 5, 0);
+		gbc_kitchenPanel.fill = GridBagConstraints.HORIZONTAL;
 		gbc_kitchenPanel.gridx = 0;
 		gbc_kitchenPanel.gridy = 4;
 		add(kitchenPanel, gbc_kitchenPanel);
@@ -244,10 +283,25 @@ public class SidePanel extends JPanel {
 		kitchenLabel.setFont(new Font("Dialog", Font.BOLD, 25));
 		kitchenPanel.add(kitchenLabel);
 
+		notificationsPanel = new JPanel();
+		FlowLayout flowLayout = (FlowLayout) notificationsPanel.getLayout();
+		flowLayout.setAlignment(FlowLayout.LEFT);
+		notificationsPanel.setBackground(Color.WHITE);
+		GridBagConstraints gbc_notificationsPanel = new GridBagConstraints();
+		gbc_notificationsPanel.fill = GridBagConstraints.HORIZONTAL;
+		gbc_notificationsPanel.gridx = 0;
+		gbc_notificationsPanel.gridy = 5;
+		add(notificationsPanel, gbc_notificationsPanel);
+
+		notificationLabel = new JLabel("Notifications");
+		notificationLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		notificationLabel.setFont(new Font("Dialog", Font.BOLD, 25));
+		notificationsPanel.add(notificationLabel);
+
 	}
 
 	public void setPanelColor(JPanel panel) {
-		JPanel[] panels = { homePanel, studentPanel, employeePanel, kitchenPanel };
+		JPanel[] panels = { homePanel, studentPanel, employeePanel, kitchenPanel, notificationsPanel };
 		panel.setBackground(new Color(SELECTED_RED, SELECTED_GREEN, SELECTED_BLUE));
 		panel.setBorder(new LineBorder(Color.BLACK));
 		for (JPanel jPanel : panels) {

@@ -23,6 +23,7 @@ public class Dashboard extends JFrame {
 	private JPanel panelToRemove;
 	private KitchenPanel kitchenPanel;
 	private Preferences dataPreferences;
+	private NotificationsPanel notificationsPanel;
 
 	public Dashboard() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -95,7 +96,18 @@ public class Dashboard extends JFrame {
 				contentPane.repaint();
 				panelToRemove = employeePanel;
 			}
-		} else {
+		} else if (panel.equals("notificationsPanel")) {
+			if (panelToRemove != notificationsPanel) {
+				notificationsPanel = new NotificationsPanel();
+				contentPane.remove(panelToRemove);
+				contentPane.add(notificationsPanel, BorderLayout.CENTER);
+				contentPane.repaint();
+				homePanel.setCount();
+				panelToRemove = notificationsPanel;
+			}
+		}
+
+		else {
 			if (panelToRemove != kitchenPanel) {
 				kitchenPanel = new KitchenPanel();
 				contentPane.remove(panelToRemove);
