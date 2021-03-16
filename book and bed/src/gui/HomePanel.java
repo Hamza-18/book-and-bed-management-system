@@ -5,14 +5,11 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import model.Controller;
-import model.Student;
 
 public class HomePanel extends JPanel {
 	private JPanel titlePanel;
@@ -36,10 +33,6 @@ public class HomePanel extends JPanel {
 	private static int BASIC_BLUE = 152;
 
 	private Controller controller;
-	private LocalDate date;
-
-	private ArrayList<Student> paidStudentsList;
-	private ArrayList<Student> unPaidStudentsList;
 
 	public HomePanel() {
 		setBackground(new Color(255, 255, 255));
@@ -50,36 +43,7 @@ public class HomePanel extends JPanel {
 
 		controller = new Controller();
 		setCount();
-		paidStudentsList = new ArrayList<>();
-		unPaidStudentsList = new ArrayList<>();
 
-		date = java.time.LocalDate.now();
-		try {
-			paidStudentsList = controller.getPaidStudents(date.getMonthValue() + "");
-			String output = "";
-			for (Student student : paidStudentsList) {
-				String value = String.format("Resident %s has paid the fee of this month", student.getName());
-				output += value + "\n";
-			}
-			System.out.println(output);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			unPaidStudentsList = controller.getUnPaidStudents(date.getMonthValue() + "");
-			String output = "";
-			for (Student student : unPaidStudentsList) {
-				String value = String.format("Resident %s needs to pay fee on %s", student.getName(),
-						student.getRentDate());
-				output += value + "\n";
-			}
-			System.out.println(output);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	public void setComponents() {

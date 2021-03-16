@@ -4,6 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,13 +24,12 @@ public class NotificationsPanel extends JPanel {
 	private JLabel lblPaidFee;
 	private JLabel lblUnpaidFee;
 
-	private JTextArea paidStudents;
-	private JTextArea unPaidStudents;
-
 	private ArrayList<Student> paidStudentsList;
 	private ArrayList<Student> unPaidStudentsList;
 	private LocalDate date;
 	private Controller controller;
+	private JTextArea unPaidStudentsArea;
+	private JTextArea paidStudentsArea;
 
 	public NotificationsPanel() {
 
@@ -37,34 +39,7 @@ public class NotificationsPanel extends JPanel {
 
 		paidStudentsList = new ArrayList<>();
 		unPaidStudentsList = new ArrayList<>();
-
-		date = java.time.LocalDate.now();
-		try {
-			paidStudentsList = controller.getPaidStudents(date.getMonthValue() + "");
-			String output = "";
-			for (Student student : paidStudentsList) {
-				String value = String.format("Resident %s has paid the fee of this month", student.getName());
-				output += value + "\n";
-			}
-			paidStudents.append(output);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		try {
-			unPaidStudentsList = controller.getUnPaidStudents(date.getMonthValue() + "");
-			String output = "";
-			for (Student student : unPaidStudentsList) {
-				String value = String.format("Resident %s needs to pay fee on %s", student.getName(),
-						student.getRentDate());
-				output += value + "\n";
-			}
-			unPaidStudents.append(output);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Refresh();
 	}
 
 	public void setComponents() {
@@ -80,27 +55,84 @@ public class NotificationsPanel extends JPanel {
 		titlePanel.add(lblNotifications);
 
 		componentsPanel = new JPanel();
-		componentsPanel.setLayout(null);
 		componentsPanel.setBackground(Color.white);
 		add(componentsPanel, BorderLayout.CENTER);
+		GridBagLayout gbl_componentsPanel = new GridBagLayout();
+		gbl_componentsPanel.columnWidths = new int[] { 251, 163, 276, 0 };
+		gbl_componentsPanel.rowHeights = new int[] { 43, 64, 298, 0 };
+		gbl_componentsPanel.columnWeights = new double[] { 1.0, 0.0, 1.0, Double.MIN_VALUE };
+		gbl_componentsPanel.rowWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
+		componentsPanel.setLayout(gbl_componentsPanel);
 
 		lblPaidFee = new JLabel("Paid Fee");
 		lblPaidFee.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblPaidFee.setBounds(12, 43, 251, 64);
-		componentsPanel.add(lblPaidFee);
+		GridBagConstraints gbc_lblPaidFee = new GridBagConstraints();
+		gbc_lblPaidFee.anchor = GridBagConstraints.NORTH;
+		gbc_lblPaidFee.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblPaidFee.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPaidFee.gridx = 0;
+		gbc_lblPaidFee.gridy = 1;
+		componentsPanel.add(lblPaidFee, gbc_lblPaidFee);
 
 		lblUnpaidFee = new JLabel("Unpaid Fee");
 		lblUnpaidFee.setFont(new Font("Dialog", Font.BOLD, 30));
-		lblUnpaidFee.setBounds(439, 43, 263, 77);
-		componentsPanel.add(lblUnpaidFee);
+		GridBagConstraints gbc_lblUnpaidFee = new GridBagConstraints();
+		gbc_lblUnpaidFee.anchor = GridBagConstraints.NORTH;
+		gbc_lblUnpaidFee.insets = new Insets(5, 5, 0, 0);
+		gbc_lblUnpaidFee.fill = GridBagConstraints.HORIZONTAL;
+		gbc_lblUnpaidFee.gridheight = 2;
+		gbc_lblUnpaidFee.gridx = 2;
+		gbc_lblUnpaidFee.gridy = 1;
+		componentsPanel.add(lblUnpaidFee, gbc_lblUnpaidFee);
 
-		paidStudents = new JTextArea();
-		paidStudents.setText("hamza");
-		paidStudents.setBounds(254, 119, -230, 276);
-		componentsPanel.add(paidStudents);
+		paidStudentsArea = new JTextArea();
+		paidStudentsArea.setFont(new Font("Dialog", Font.PLAIN, 15));
+		paidStudentsArea.setEditable(false);
+		GridBagConstraints gbc_paidStudentsArea = new GridBagConstraints();
+		gbc_paidStudentsArea.fill = GridBagConstraints.BOTH;
+		gbc_paidStudentsArea.insets = new Insets(5, 5, 0, 5);
+		gbc_paidStudentsArea.gridx = 0;
+		gbc_paidStudentsArea.gridy = 2;
+		componentsPanel.add(paidStudentsArea, gbc_paidStudentsArea);
 
-		unPaidStudents = new JTextArea();
-		unPaidStudents.setBounds(697, 119, -276, 276);
-		componentsPanel.add(unPaidStudents);
+		unPaidStudentsArea = new JTextArea();
+		unPaidStudentsArea.setFont(new Font("Dialog", Font.PLAIN, 15));
+		unPaidStudentsArea.setEditable(false);
+		GridBagConstraints gbc_unPaidStudentsArea = new GridBagConstraints();
+		gbc_unPaidStudentsArea.fill = GridBagConstraints.BOTH;
+		gbc_unPaidStudentsArea.gridx = 2;
+		gbc_unPaidStudentsArea.gridy = 2;
+		componentsPanel.add(unPaidStudentsArea, gbc_unPaidStudentsArea);
+	}
+
+	public void Refresh() {
+		date = java.time.LocalDate.now();
+		try {
+			paidStudentsList = controller.getPaidStudents(date.getMonthValue() + "");
+			String output = "";
+			for (Student student : paidStudentsList) {
+				String value = String.format("Resident %s has paid the fee of this month", student.getName());
+				output += value + "\n";
+			}
+			paidStudentsArea.append(output);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		try {
+			unPaidStudentsList = controller.getUnPaidStudents(date.getMonthValue() + "");
+			String output = "";
+			for (Student student : unPaidStudentsList) {
+				String value = String.format("Resident %s needs to pay fee on %s", student.getName(),
+						student.getRentDate());
+				output += value + "\n";
+			}
+
+			unPaidStudentsArea.append(output);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

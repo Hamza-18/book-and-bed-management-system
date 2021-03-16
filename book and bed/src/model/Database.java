@@ -301,7 +301,7 @@ public class Database {
 	public ArrayList<Student> getUnPaidStudents(String month) throws SQLException {
 		unPaidFeeStudents.clear();
 		String getDb;
-		getDb = "select * from Students where Month(AdmissionDate) = " + "'" + month + "'" + "and RentPaid = 'No' ";
+		getDb = "select * from Students where Month(AdmissionDate) <= " + "'" + month + "'" + "and RentPaid = 'No' ";
 		Statement selectStmt = connection.createStatement();
 		ResultSet checkResult = selectStmt.executeQuery(getDb);
 		while (checkResult.next()) {
